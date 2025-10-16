@@ -302,8 +302,7 @@ We welcome contributions! Here's how:
 *Interested in inclusive communication and accessible technology*
 
 **Built at**: Good Vibes Only Buildathon 2025  
-**Location**: USC Information Sciences Institute, Marina Del Rey  
-**Date**: October 16-17, 2025
+**Location**: USC Information Sciences Institute, Marina Del Rey 
 
 ## 🙏 Acknowledgments
 - **USC Viterbi School of Engineering** - Venue and support
@@ -311,16 +310,11 @@ We welcome contributions! Here's how:
 - **Lovable** - Technology partner and credits
 - **Meta** - Judge participation
 - **Microsoft** - Inclusive Tech Lab inspiration
-- **ASL Community** - Feedback and guidance
 Special thanks to all mentors and organizers who made this possible!
 
-## 📄 License
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
 ## 📞 Contact
-
 **Mustafa Nomair**  
-- Email: mnomair01@gmail.com
+- Email: nomair@usc.edu
 - LinkedIn: [View Profile](https://www.linkedin.com/in/mustafa-nomair)
 - Project Demo: [Insert Video Link]
 **Project Repository**: [github.com/yourusername/SignSpace](https://github.com/yourusername/SignSpace)
