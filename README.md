@@ -281,7 +281,6 @@ var useMockData = false  // Real Vision Pro hand tracking
 - [ ] iOS companion app (practice tracking)
 
 ## 🤝 Contributing
-
 We welcome contributions! Here's how:
 
 1. Fork the repository
@@ -307,23 +306,16 @@ We welcome contributions! Here's how:
 **Date**: October 16-17, 2025
 
 ## 🙏 Acknowledgments
-
 - **USC Viterbi School of Engineering** - Venue and support
 - **PayPal** - Platinum sponsor
 - **Lovable** - Technology partner and credits
 - **Meta** - Judge participation
 - **Microsoft** - Inclusive Tech Lab inspiration
 - **ASL Community** - Feedback and guidance
-
 Special thanks to all mentors and organizers who made this possible!
 
----
-
 ## 📄 License
-
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
----
 
 ## 📞 Contact
 
@@ -331,17 +323,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - Email: mnomair01@gmail.com
 - LinkedIn: [View Profile](https://www.linkedin.com/in/mustafa-nomair)
 - Project Demo: [Insert Video Link]
-
 **Project Repository**: [github.com/yourusername/SignSpace](https://github.com/yourusername/SignSpace)
 
----
-
 ## 🌟 Star This Repo!
-
 If SignSpace helped you or you believe in making ASL learning accessible, please ⭐ this repository!
-
----
-
-**#AI4SocialGood #Accessibility #visionOS #ASL #SpatialComputing**
-
 *Making the world more inclusive, one sign at a time.* 🤟
