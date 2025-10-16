@@ -6,8 +6,6 @@
 
 Built at **Good Vibes Only Buildathon 2025** | USC x PayPal x Lovable
 
----
-
 ## 🎯 The Problem
 
 - **430 million people worldwide** need hearing support and rehabilitation
@@ -16,19 +14,16 @@ Built at **Good Vibes Only Buildathon 2025** | USC x PayPal x Lovable
 - Traditional methods (videos, books) lack interactive guidance
 - No way to verify if you're making signs correctly
 
----
-
 ## 💡 Our Solution
 
 **SignSpace** leverages Apple Vision Pro's advanced hand tracking to provide:
 
-- ✅ **Real-time gesture recognition** - Detects ASL signs with 90Hz precision
-- ✅ **Ghost hands overlay** - Transparent "target" hands show the correct position
-- ✅ **Specific, actionable feedback** - "Move your thumb closer to your palm" instead of generic errors
-- ✅ **Progress tracking** - Visual indicators showing mastery of each sign
-- ✅ **Spatial visualization** - 3D hand skeleton with joint-level accuracy
+- **Real-time gesture recognition** - Detects ASL signs with 90Hz precision
+- **Ghost hands overlay** - Transparent "target" hands show the correct position
+- **Specific, actionable feedback** - "Move your thumb closer to your palm" instead of generic errors
+- **Progress tracking** - Visual indicators showing mastery of each sign
+- **Spatial visualization** - 3D hand skeleton with joint-level accuracy
 
----
 
 ## 🎥 Demo
 
@@ -41,8 +36,6 @@ Built at **Good Vibes Only Buildathon 2025** | USC x PayPal x Lovable
 4. Real-time corrections and validation
 5. Progress through 5 ASL signs
 6. Celebratory confetti on mastery
-
----
 
 ## 🛠️ Technology Stack
 
@@ -58,8 +51,6 @@ Built at **Good Vibes Only Buildathon 2025** | USC x PayPal x Lovable
 - **Spatial Hand Visualization** - 3D skeleton rendering with joint connections
 - **Adaptive Feedback System** - Confidence-based color coding (red/yellow/green)
 - **Mock Data Support** - Simulator testing without physical hardware
-
----
 
 ## 🏗️ Architecture
 ```
@@ -85,8 +76,6 @@ ContentView (displays feedback + ghost hands)
     ↓
 User sees real-time corrections
 ```
-
----
 
 ## 🎨 Features
 
@@ -126,8 +115,6 @@ User sees real-time corrections
 - Error buzz (incorrect position)
 - System haptic feedback
 
----
-
 ## 📚 Supported ASL Signs
 
 Currently supports **5 foundational signs**:
@@ -141,8 +128,6 @@ Currently supports **5 foundational signs**:
 | **Thank You** | Flat hand, fingers together | Easy |
 
 **Future**: Full alphabet (26 letters) + 50+ common phrases
-
----
 
 ## 🚀 Getting Started
 
@@ -187,8 +172,6 @@ For real device testing:
 var useMockData = false  // Real Vision Pro hand tracking
 ```
 
----
-
 ## 🎓 How It Works
 
 ### Hand Tracking Pipeline
@@ -219,8 +202,6 @@ var useMockData = false  // Real Vision Pro hand tracking
    - Connect joints with skeleton lines
    - Color-code based on accuracy
 
----
-
 ## 🏆 Technical Highlights
 
 ### Why This Showcases Vision Pro
@@ -244,8 +225,6 @@ var useMockData = false  // Real Vision Pro hand tracking
    - Makes ASL learning accessible to all
    - Removes barriers of traditional methods
    - Inclusive technology demonstrating "solve for one, extend to many"
-
----
 
 ## 📊 Impact & Market Opportunity
 
@@ -272,8 +251,6 @@ var useMockData = false  // Real Vision Pro hand tracking
 - Real-time 3D feedback (vs 2D videos)
 - Personalized corrections (vs generic tutorials)
 - Gamified progress tracking
-
----
 
 ## 🔮 Future Roadmap
 
@@ -303,8 +280,6 @@ var useMockData = false  // Real Vision Pro hand tracking
 - [ ] Special Olympics integration
 - [ ] iOS companion app (practice tracking)
 
----
-
 ## 🤝 Contributing
 
 We welcome contributions! Here's how:
@@ -322,8 +297,6 @@ We welcome contributions! Here's how:
 - Accessibility features
 - Documentation improvements
 
----
-
 ## 👥 Team
 
 **Mustafa Nomair** - Computer Science @ USC  
@@ -332,8 +305,6 @@ We welcome contributions! Here's how:
 **Built at**: Good Vibes Only Buildathon 2025  
 **Location**: USC Information Sciences Institute, Marina Del Rey  
 **Date**: October 16-17, 2025
-
----
 
 ## 🙏 Acknowledgments
 
