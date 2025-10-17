@@ -183,12 +183,13 @@ struct ContentView: View {
         let result = gestureRecognizer.detectSign(from: handTracker.rightHand)
         detectedSign = result.sign
         confidence = result.confidence
-        feedback = result.feedback.isEmpty ? "Make the sign for '\(currentTargetSign.rawValue)'" : result.feedback
 
         let now = Date()
-        let cooldown: TimeInterval = 2.0  // 2 seconds between sound triggers
+        let cooldown: TimeInterval = 2.0
 
+        // 🔒 Only consider confidence if sign matches the current target
         if detectedSign == currentTargetSign {
+            // ✅ Correct sign
             if confidence > 0.85 {
                 feedbackColor = .green
                 feedbackEmoji = "🎉"
@@ -205,7 +206,6 @@ struct ContentView: View {
             } else if confidence > 0.65 {
                 feedbackColor = .yellow
                 feedbackEmoji = "👍"
-
                 if now.timeIntervalSince(lastSoundPlayedAt) > cooldown {
                     SoundManager.shared.playProgress()
                     lastSoundPlayedAt = now
@@ -214,17 +214,22 @@ struct ContentView: View {
                 feedbackColor = .orange
                 feedbackEmoji = "🤏"
             }
-        } else if detectedSign != .none {
+        }
+        // 🚫 Detected a sign, but not the target
+        else if detectedSign != .none {
             feedbackColor = .red
             feedbackEmoji = "👋"
-
+            feedback = "That's the sign for \(detectedSign.rawValue). Try \(currentTargetSign.rawValue)!"
             if now.timeIntervalSince(lastSoundPlayedAt) > cooldown {
                 SoundManager.shared.playError()
                 lastSoundPlayedAt = now
             }
-        } else {
+        }
+        // 🕓 No sign detected
+        else {
             feedbackColor = .gray
             feedbackEmoji = "✋"
+            feedback = "Show your hand to the camera"
         }
     }
 
