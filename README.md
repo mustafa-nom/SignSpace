@@ -4,7 +4,7 @@
 
 **Learn American Sign Language with instant, personalized feedback using spatial computing.**
 
-Built at **Good Vibes Only Buildathon 2025** | USC x PayPal x Lovable
+Built at **Good Vibes Only Buildathon 2025** | USC x PayPal x Lovable x META x Apple
 
 ## 🎯 The Problem
 
@@ -27,7 +27,7 @@ Built at **Good Vibes Only Buildathon 2025** | USC x PayPal x Lovable
 
 ## 🎥 Demo
 
-> **[Insert Demo Video Link Here]**
+> **[Demo Video Link Here](https://drive.google.com/file/d/1XPNRzenzS-k5-pO7UJ3PRrQrqJHE6at7/view?usp=sharing)**
 
 ### Key Features Showcased:
 1. Hand tracking initialization
@@ -316,7 +316,7 @@ Special thanks to all mentors and organizers who made this possible!
 **Mustafa Nomair**  
 - Email: nomair@usc.edu
 - LinkedIn: [View Profile](https://www.linkedin.com/in/mustafa-nomair)
-- Project Demo: [Insert Video Link]
+- Project Demo: [Insert Video Link](https://drive.google.com/file/d/1XPNRzenzS-k5-pO7UJ3PRrQrqJHE6at7/view?usp=sharing)
 **Project Repository**: [github.com/yourusername/SignSpace](https://github.com/yourusername/SignSpace)
 
 ## 🌟 Star This Repo!
