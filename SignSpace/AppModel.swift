@@ -1,21 +1,8 @@
-//
-//  AppModel.swift
-//  SignSpace
-//
-//  Created by Mus Nom on 10/16/25.
-//
+import Observation
 
-import SwiftUI
-
-/// Maintains app-wide state
-@MainActor
 @Observable
-class AppModel {
-    let immersiveSpaceID = "ImmersiveSpace"
-    enum ImmersiveSpaceState {
-        case closed
-        case inTransition
-        case open
-    }
-    var immersiveSpaceState = ImmersiveSpaceState.closed
+final class AppModel {
+    enum ImmersiveSpaceState { case open, closed, inTransition }
+    var immersiveSpaceID: String = "HandTrackingScene"
+    var immersiveSpaceState: ImmersiveSpaceState = .closed
 }
