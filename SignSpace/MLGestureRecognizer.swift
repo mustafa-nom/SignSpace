@@ -112,15 +112,23 @@ class MLGestureRecognizer {
     
     private func extractFeatures(from hand: HandData) -> [Double] {
         var features: [Double] = []
-        // Collect (x, y) from the first 6 joints
-        for i in 0..<6 {
+
+        // Same order as used in DataCollectionView
+        let jointsToUse = min(hand.joints.count, 6)
+        for i in 0..<jointsToUse {
             let joint = hand.joints[i]
             features.append(Double(joint.position.x))
             features.append(Double(joint.position.y))
         }
+
+        // Fill up missing values to 12
+        while features.count < 12 {
+            features.append(0.0)
+        }
+
         return features
     }
-    
+
     // MARK: - Feedback Generator
     
     private func generateFeedback(for sign: ASLSign, confidence: Float) -> String {

@@ -11,10 +11,11 @@ struct ContentView: View {
     @State private var handTracker = HandTrackingManager()
     @State private var gestureRecognizer = MLGestureRecognizer()
 
-    @State private var currentTargetSign: ASLSign = .letterA
+    @State private var currentTargetSign: ASLSign = .A
     @State private var detectedSign: ASLSign = .none
     @State private var confidence: Float = 0.0
     @State private var feedback: String = "Make the sign for 'A'"
+    @State private var lastSoundPlayedAt = Date.distantPast
 
     @State private var feedbackColor: Color = .gray
     @State private var feedbackEmoji = "✋"
@@ -24,90 +25,88 @@ struct ContentView: View {
 
     @State private var detectionTimer: Timer?
 
-    let allSigns: [ASLSign] = [.letterA, .letterB, .letterC, .hello, .thankYou]
+    let allSigns: [ASLSign] = [.A, .B, .C, .Hello, .ThankYou]
 
     var body: some View {
         if showDataCollection {
             DataCollectionView(handTracker: handTracker)
         } else {
             ZStack {
-                VStack(spacing: 20) {
+                VStack(spacing: 25) {
 
                     // Header with Progress
-                    VStack(spacing: 5) {
+                    VStack(spacing: 6) {
                         Text("SignSpace")
-                            .font(.largeTitle)
-                            .fontWeight(.bold)
+                            .font(.largeTitle.bold())
 
                         Text(handTracker.useMockData ? "🎮 Simulator Mode" : "👋 Vision Pro Mode")
                             .font(.title3)
                             .foregroundStyle(.secondary)
 
-                        HStack(spacing: 15) {
+                        HStack(spacing: 12) {
                             Text("Progress:")
                                 .font(.caption)
                                 .foregroundStyle(.secondary)
 
-                            HStack(spacing: 5) {
+                            HStack(spacing: 6) {
                                 ForEach(allSigns, id: \.self) { sign in
                                     Circle()
                                         .fill(signsLearned.contains(sign) ? Color.green : Color.gray.opacity(0.3))
-                                        .frame(width: 12, height: 12)
+                                        .frame(width: 10, height: 10)
                                 }
                             }
 
                             Text("\(signsLearned.count)/\(allSigns.count)")
-                                .font(.caption)
-                                .fontWeight(.bold)
+                                .font(.caption.bold())
                         }
                     }
-                    .padding(.top, 20)
+                    .padding(.top, 25)
 
-                    // Current Lesson
-                    VStack(spacing: 5) {
-                        Text("Learn the sign:")
+                    // Current Lesson Section
+                    VStack(spacing: 10) {
+                        Text("Learn the Sign:")
                             .font(.title2)
                             .foregroundStyle(.secondary)
-
-                        Text(currentTargetSign.rawValue)
-                            .font(.system(size: 100))
-                            .fontWeight(.bold)
+                        
+                        Text(currentTargetSign.rawValue.replacingOccurrences(of: "letter", with: "").uppercased())
+                            .font(.system(size: 100, weight: .bold))
                             .foregroundStyle(feedbackColor)
-                            .animation(.spring(response: 0.3), value: feedbackColor)
-                    }
 
-                    // Hand visualization
-                    RealityView { content in
-                        let handVisualization = createHandVisualization()
-                        content.add(handVisualization)
-                    } update: { content in
-                        updateHandVisualization(content: content)
+                        
+                        // Polished static ASL image card
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 20)
+                                .fill(Color.white.opacity(0.15))
+                                .frame(width: 280, height: 280)
+                                .shadow(radius: 8)
+
+                            Image(currentTargetSign.rawValue)
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 220, height: 220)
+                                .cornerRadius(20)
+                        }
                     }
-                    .frame(height: 200)
-                    .background(Color.black.opacity(0.05))
-                    .cornerRadius(20)
-                    .padding(.horizontal)
+                    .padding(.top, 10)
 
                     // Feedback
-                    VStack(spacing: 10) {
+                    VStack(spacing: 12) {
                         HStack {
                             Text(feedbackEmoji)
                                 .font(.system(size: 50))
                                 .animation(.spring(response: 0.3), value: feedbackEmoji)
 
-                            VStack(alignment: .leading, spacing: 5) {
+                            VStack(alignment: .leading, spacing: 6) {
                                 Text(feedback)
-                                    .font(.title3)
-                                    .fontWeight(.semibold)
+                                    .font(.title3.bold())
                                     .multilineTextAlignment(.leading)
 
                                 if confidence > 0 {
                                     HStack(spacing: 8) {
                                         ProgressView(value: Double(confidence))
-                                            .frame(width: 100)
+                                            .frame(width: 120)
                                         Text("\(Int(confidence * 100))%")
-                                            .font(.caption)
-                                            .fontWeight(.bold)
+                                            .font(.caption.bold())
                                             .foregroundStyle(feedbackColor)
                                     }
                                 }
@@ -129,20 +128,20 @@ struct ContentView: View {
 
                     Spacer()
 
-                    // Controls
-                    HStack(spacing: 20) {
+                    // Navigation Controls
+                    HStack(spacing: 25) {
                         Button(action: previousSign) {
                             HStack { Image(systemName: "chevron.left"); Text("Previous") }
                         }
-                        .disabled(currentTargetSign == .letterA)
+                        .disabled(currentTargetSign == .A)
 
                         Button(action: nextSign) {
                             HStack { Text("Next Sign"); Image(systemName: "chevron.right") }
                         }
-                        .disabled(currentTargetSign == .thankYou)
+                        .disabled(currentTargetSign == .ThankYou)
                     }
                     .buttonStyle(.bordered)
-                    .padding(.bottom, 30)
+                    .padding(.bottom, 25)
 
                     ToggleImmersiveSpaceButton()
                         .padding(.bottom, 20)
@@ -155,7 +154,7 @@ struct ContentView: View {
             .padding()
             .onAppear {
                 startGestureDetection()
-                handTracker.start() // This now just polls HandTrackingSystem
+                handTracker.start()
                 Task { @MainActor in
                     await openImmersiveSpace(id: "HandTrackingScene")
                 }
@@ -165,94 +164,6 @@ struct ContentView: View {
                 handTracker.stop()
             }
         }
-    }
-
-    // MARK: - Hand Visualization
-
-    func createHandVisualization() -> Entity {
-        let container = Entity()
-        container.name = "handContainer"
-        return container
-    }
-
-    func updateHandVisualization(content: RealityViewContent) {
-        guard let container = content.entities.first(where: { $0.name == "handContainer" }) else { return }
-        container.children.removeAll()
-
-        // Ghost (target) hand
-        let ghostPositions = GhostHandData.getIdealHandPositions(for: currentTargetSign)
-        for joint in ghostPositions {
-            let sphere = MeshResource.generateSphere(radius: 0.012)
-            let material = SimpleMaterial(color: UIColor.green.withAlphaComponent(0.4), isMetallic: false)
-            let ghostEntity = ModelEntity(mesh: sphere, materials: [material])
-            ghostEntity.position = joint.position
-            container.addChild(ghostEntity)
-        }
-
-        if ghostPositions.count >= 6 {
-            let wrist = ghostPositions[0].position
-            let thumb = ghostPositions[1].position
-            let index = ghostPositions[2].position
-            let middle = ghostPositions[3].position
-            let ring = ghostPositions[4].position
-            let pinky = ghostPositions[5].position
-
-            container.addChild(createLineBetween(from: wrist, to: thumb, color: .green.withAlphaComponent(0.4)))
-            container.addChild(createLineBetween(from: wrist, to: index, color: .green.withAlphaComponent(0.4)))
-            container.addChild(createLineBetween(from: wrist, to: middle, color: .green.withAlphaComponent(0.4)))
-            container.addChild(createLineBetween(from: wrist, to: ring, color: .green.withAlphaComponent(0.4)))
-            container.addChild(createLineBetween(from: wrist, to: pinky, color: .green.withAlphaComponent(0.4)))
-
-            container.addChild(createLineBetween(from: index, to: middle, color: .green.withAlphaComponent(0.3), thickness: 0.002))
-            container.addChild(createLineBetween(from: middle, to: ring, color: .green.withAlphaComponent(0.3), thickness: 0.002))
-            container.addChild(createLineBetween(from: ring, to: pinky, color: .green.withAlphaComponent(0.3), thickness: 0.002))
-        }
-
-        // Live right hand
-        if let rightHand = handTracker.rightHand, rightHand.joints.count >= 6 {
-            for joint in rightHand.joints {
-                let sphere = MeshResource.generateSphere(radius: 0.010)
-                let material = SimpleMaterial(color: UIColor.systemBlue, isMetallic: false)
-                let jointEntity = ModelEntity(mesh: sphere, materials: [material])
-                jointEntity.position = joint.position
-                container.addChild(jointEntity)
-            }
-
-            let wrist = rightHand.joints[0].position
-            let thumb = rightHand.joints[1].position
-            let index = rightHand.joints[2].position
-            let middle = rightHand.joints[3].position
-            let ring = rightHand.joints[4].position
-            let pinky = rightHand.joints[5].position
-
-            container.addChild(createLineBetween(from: wrist, to: thumb, color: .systemBlue))
-            container.addChild(createLineBetween(from: wrist, to: index, color: .systemBlue))
-            container.addChild(createLineBetween(from: wrist, to: middle, color: .systemBlue))
-            container.addChild(createLineBetween(from: wrist, to: ring, color: .systemBlue))
-            container.addChild(createLineBetween(from: wrist, to: pinky, color: .systemBlue))
-
-            container.addChild(createLineBetween(from: index, to: middle, color: .systemBlue, thickness: 0.002))
-            container.addChild(createLineBetween(from: middle, to: ring, color: .systemBlue, thickness: 0.002))
-            container.addChild(createLineBetween(from: ring, to: pinky, color: .systemBlue, thickness: 0.002))
-        }
-    }
-
-    func createLineBetween(from: SIMD3<Float>, to: SIMD3<Float>, color: UIColor, thickness: Float = 0.003) -> ModelEntity {
-        let distance = simd_distance(from, to)
-        let midpoint = (from + to) / 2
-        let cylinder = MeshResource.generateCylinder(height: distance, radius: thickness)
-        let material = SimpleMaterial(color: color, isMetallic: false)
-        let lineEntity = ModelEntity(mesh: cylinder, materials: [material])
-        lineEntity.position = midpoint
-
-        let direction = normalize(to - from)
-        let up = SIMD3<Float>(0, 1, 0)
-        if abs(dot(direction, up)) < 0.999 {
-            let axis = cross(up, direction)
-            let angle = acos(dot(up, direction))
-            lineEntity.orientation = simd_quatf(angle: angle, axis: axis)
-        }
-        return lineEntity
     }
 
     // MARK: - Gesture Detection
@@ -274,11 +185,19 @@ struct ContentView: View {
         confidence = result.confidence
         feedback = result.feedback.isEmpty ? "Make the sign for '\(currentTargetSign.rawValue)'" : result.feedback
 
+        let now = Date()
+        let cooldown: TimeInterval = 2.0  // 2 seconds between sound triggers
+
         if detectedSign == currentTargetSign {
             if confidence > 0.85 {
                 feedbackColor = .green
                 feedbackEmoji = "🎉"
-                SoundManager.shared.playSuccess()
+
+                if now.timeIntervalSince(lastSoundPlayedAt) > cooldown {
+                    SoundManager.shared.playSuccess()
+                    lastSoundPlayedAt = now
+                }
+
                 if !signsLearned.contains(currentTargetSign) {
                     signsLearned.insert(currentTargetSign)
                     triggerConfetti()
@@ -286,7 +205,11 @@ struct ContentView: View {
             } else if confidence > 0.65 {
                 feedbackColor = .yellow
                 feedbackEmoji = "👍"
-                SoundManager.shared.playProgress()
+
+                if now.timeIntervalSince(lastSoundPlayedAt) > cooldown {
+                    SoundManager.shared.playProgress()
+                    lastSoundPlayedAt = now
+                }
             } else {
                 feedbackColor = .orange
                 feedbackEmoji = "🤏"
@@ -294,7 +217,11 @@ struct ContentView: View {
         } else if detectedSign != .none {
             feedbackColor = .red
             feedbackEmoji = "👋"
-            SoundManager.shared.playError()
+
+            if now.timeIntervalSince(lastSoundPlayedAt) > cooldown {
+                SoundManager.shared.playError()
+                lastSoundPlayedAt = now
+            }
         } else {
             feedbackColor = .gray
             feedbackEmoji = "✋"

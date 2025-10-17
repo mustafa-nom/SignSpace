@@ -3,7 +3,7 @@ import SwiftUI
 struct DataCollectionView: View {
     var handTracker: HandTrackingManager
     
-    @State private var currentSign: ASLSign = .letterA
+    @State private var currentSign: ASLSign = .A
     @State private var samplesCollected = 0
     @State private var isRecording = false
     @State private var collectedSamples: [TrainingSample] = []
@@ -18,7 +18,7 @@ struct DataCollectionView: View {
     @Environment(\.dismissImmersiveSpace) private var dismissImmersiveSpace
     
     let targetSamplesPerSign = 100
-    let allSigns: [ASLSign] = [.letterA, .letterB, .letterC, .hello, .thankYou]
+    let allSigns: [ASLSign] = [.A, .B, .C, .Hello, .ThankYou]
     
     var body: some View {
         VStack(spacing: 30) {
@@ -87,7 +87,7 @@ struct DataCollectionView: View {
                 
                 HStack(spacing: 20) {
                     Button("Previous Sign") { previousSign() }
-                        .disabled(currentSign == .letterA || isRecording)
+                        .disabled(currentSign == .A || isRecording)
                     
                     Button("Next Sign") { nextSign() }
                         .disabled(samplesCollected < targetSamplesPerSign || isRecording)

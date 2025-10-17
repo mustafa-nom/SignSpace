@@ -9,15 +9,15 @@ import simd
 struct GhostHandData {
     static func getIdealHandPositions(for sign: ASLSign) -> [HandJoint] {
         switch sign {
-        case .letterA:
+        case .A:
             return letterAPositions()
-        case .letterB:
+        case .B:
             return letterBPositions()
-        case .letterC:
+        case .C:
             return letterCPositions()
-        case .hello:
+        case .Hello:
             return helloPositions()
-        case .thankYou:
+        case .ThankYou:
             return thankYouPositions()
         case .none:
             return []
