@@ -7,7 +7,7 @@ struct ContentView: View {
 
     @Environment(\.openImmersiveSpace) private var openImmersiveSpace
 
-    @State private var showDataCollection = true
+    @State private var showDataCollection = false
     @State private var handTracker = HandTrackingManager()
     @State private var gestureRecognizer = MLGestureRecognizer()
 

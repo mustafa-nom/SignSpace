@@ -10,15 +10,15 @@ import Foundation
 
 class MLGestureRecognizer {
     
-    private var model: ASLClassifier1?
+    private var model: ASLClassifierReal1?
     
     init() {
-        do {
-            let config = MLModelConfiguration()
-            model = try ASLClassifier1(configuration: config)
+        let config = MLModelConfiguration()
+        if let loadedModel = try? ASLClassifierReal1(configuration: config) {
+            model = loadedModel
             print("✅ ML Model loaded successfully!")
-        } catch {
-            print("❌ Failed to load ML model: \(error)")
+        } else {
+            print("❌ Failed to load ML model.")
         }
     }
     
@@ -39,7 +39,7 @@ class MLGestureRecognizer {
             )
         }
         
-        // Extract features from hand joints (12 features = 6 joints × 2 coords)
+        // Ensure sufficient tracked joints
         guard hand.joints.count >= 6 else {
             return GestureResult(
                 sign: .none,
@@ -48,11 +48,12 @@ class MLGestureRecognizer {
             )
         }
         
+        // Extract feature vector (12 = 6 joints × 2 coordinates)
         let features = extractFeatures(from: hand)
         
         do {
-            // Create model input
-            let input = ASLClassifier1Input(
+            // Create model input (matches your CreateML schema)
+            let input = ASLClassifierReal1Input(
                 feature_0: features[0],
                 feature_1: features[1],
                 feature_2: features[2],
@@ -67,10 +68,10 @@ class MLGestureRecognizer {
                 feature_11: features[11]
             )
             
-            // Get prediction
+            // Get model prediction
             let prediction = try model.prediction(input: input)
             
-            // Convert to ASLSign
+            // Map predicted label → ASLSign enum
             guard let detectedSign = ASLSign(rawValue: prediction.label) else {
                 print("⚠️ Unknown label from model: \(prediction.label)")
                 return GestureResult(
@@ -80,23 +81,15 @@ class MLGestureRecognizer {
                 )
             }
             
-            // Get confidence from labelProbability (singular!)
+            // Extract confidence
             var confidence: Float = 0.0
-            
-            if let probDict = prediction.labelProbability as? [String: Double],
-               let prob = probDict[prediction.label] {
-                confidence = Float(prob)
-            } else if let probDict = prediction.labelProbability as? [String: NSNumber],
-                      let prob = probDict[prediction.label] {
-                confidence = Float(truncating: prob)
+            if let prob = prediction.labelProbability[prediction.label] {
+                confidence = Float(truncating: prob as NSNumber)
             } else {
-                // Fallback
-                confidence = 0.85
+                confidence = 0.85 // fallback
             }
             
-            // Generate feedback
             let feedback = generateFeedback(for: detectedSign, confidence: confidence)
-            
             print("🤖 ML Prediction: \(prediction.label) (\(Int(confidence * 100))% confidence)")
             
             return GestureResult(
@@ -115,29 +108,32 @@ class MLGestureRecognizer {
         }
     }
     
+    // MARK: - Feature Extraction
+    
     private func extractFeatures(from hand: HandData) -> [Double] {
         var features: [Double] = []
-        
-        // Extract X and Y coordinates from first 6 joints
+        // Collect (x, y) from the first 6 joints
         for i in 0..<6 {
             let joint = hand.joints[i]
             features.append(Double(joint.position.x))
             features.append(Double(joint.position.y))
         }
-        
         return features
     }
     
+    // MARK: - Feedback Generator
+    
     private func generateFeedback(for sign: ASLSign, confidence: Float) -> String {
-        if confidence > 0.9 {
+        switch confidence {
+        case let c where c > 0.9:
             return "Perfect! 🎉"
-        } else if confidence > 0.75 {
+        case let c where c > 0.75:
             return "Great! Almost perfect for \(sign.rawValue)"
-        } else if confidence > 0.6 {
+        case let c where c > 0.6:
             return "Good try! Keep practicing \(sign.rawValue)"
-        } else if confidence > 0.4 {
+        case let c where c > 0.4:
             return "Getting closer to \(sign.rawValue)..."
-        } else {
+        default:
             return "Not quite \(sign.rawValue). Review the correct form"
         }
     }

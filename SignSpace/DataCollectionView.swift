@@ -10,6 +10,10 @@ struct DataCollectionView: View {
     @State private var recordingTimer: Timer?
     @State private var immersiveSpaceOpened = false
     
+    // ADD THESE TWO LINES:
+    @State private var showShareSheet = false
+    @State private var exportedFileURL: URL?
+    
     @Environment(\.openImmersiveSpace) private var openImmersiveSpace
     @Environment(\.dismissImmersiveSpace) private var dismissImmersiveSpace
     
@@ -94,18 +98,29 @@ struct DataCollectionView: View {
                     .buttonStyle(.borderedProminent)
                     .disabled(collectedSamples.isEmpty)
                     .padding(.top, 20)
+                
+                // ADD THIS: Show total samples collected
+                if !collectedSamples.isEmpty {
+                    Text("Total samples collected: \(collectedSamples.count)")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                }
             }
             .padding(.bottom, 30)
         }
         .padding()
         .task {
-            // Open immersive space first
+            // Only open immersive space once
+            guard !immersiveSpaceOpened else { return }
+            
             print("📱 Opening immersive space...")
             await openImmersiveSpace(id: "HandTrackingScene")
             immersiveSpaceOpened = true
+
+            // Give RealityKit a short moment to initialize
+            try? await Task.sleep(for: .seconds(0.5))
             
-            // Then start hand tracking
-            try? await Task.sleep(for: .seconds(0.5)) // Give immersive space time to initialize
+            // Start the hand tracker after initialization
             handTracker.start()
         }
         .onDisappear {
@@ -113,6 +128,12 @@ struct DataCollectionView: View {
             handTracker.stop()
             Task {
                 await dismissImmersiveSpace()
+            }
+        }
+        // ADD THIS: Share sheet
+        .sheet(isPresented: $showShareSheet) {
+            if let url = exportedFileURL {
+                ShareSheet(activityItems: [url])
             }
         }
     }
@@ -164,7 +185,6 @@ struct DataCollectionView: View {
             return nil
         }
         
-        // Extract features from first 6 key joints (wrist, thumb, index, middle, ring, pinky tips)
         var features: [Double] = []
         let jointsToUse = min(hand.joints.count, 6)
         
@@ -174,7 +194,6 @@ struct DataCollectionView: View {
             features.append(Double(joint.position.y))
         }
         
-        // Pad with zeros if needed
         while features.count < 12 {
             features.append(0.0)
         }
@@ -200,7 +219,7 @@ struct DataCollectionView: View {
         }
     }
     
-    // MARK: - Export
+    // MARK: - Export (UPDATED)
     
     func exportToCSV() {
         var csv = "label,feature_0,feature_1,feature_2,feature_3,feature_4,feature_5,feature_6,feature_7,feature_8,feature_9,feature_10,feature_11\n"
@@ -222,6 +241,11 @@ struct DataCollectionView: View {
                 print("✅✅✅ CSV SAVED TO: \(fileURL.path)")
                 print("📊 Total samples: \(collectedSamples.count)")
                 print("📁 File: \(filename)")
+                
+                // ADDED: Store URL and show share sheet
+                exportedFileURL = fileURL
+                showShareSheet = true
+                
             } catch {
                 print("❌ Failed to save CSV: \(error)")
             }
@@ -232,4 +256,19 @@ struct DataCollectionView: View {
 struct TrainingSample {
     let features: [Double]
     let label: String
+}
+
+// ADD THIS: Share Sheet for iOS/visionOS
+struct ShareSheet: UIViewControllerRepresentable {
+    let activityItems: [Any]
+    
+    func makeUIViewController(context: Context) -> UIActivityViewController {
+        let controller = UIActivityViewController(
+            activityItems: activityItems,
+            applicationActivities: nil
+        )
+        return controller
+    }
+    
+    func updateUIViewController(_ uiViewController: UIActivityViewController, context: Context) {}
 }
