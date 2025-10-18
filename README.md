@@ -299,7 +299,18 @@ We welcome contributions! Here's how:
 ## 👥 Team
 
 **Mustafa Nomair** - Computer Science @ USC  
-*Interested in inclusive communication and accessible technology*
+*Led full product development -- from design and coding to gesture detection, feedback logic, and Vision Pro app integration alongside Abdelaziz. I'm interested in inclusive communication and accessible technology!*
+**Abdelaziz Abderhman** - Electrical and Computer Engineering @ USC @ USC  
+*Handled Vision Pro hardware setup and sensor integration for real-time hand tracking.*
+**Hamza Wako** - Computer Science and Business Administration @ USC
+*Served as project manager, coordinating tasks, deadlines, and testing cycles.*
+**Ardysatrio Fakhri Haroen** - Computer Science (M.S.) @ USC
+*Mentored the team on ML model structure, app architecture, and performance tuning.*
+**Ahmed Ataelfadeel** - Electrical and Computer Engineering @ USC  
+*Assisted with hardware connectivity under Abdelaziz’s guidance.*
+
+Ardysatrio Fakhri Haroen – Computer Science (M.S.) @ USC
+Mentored the team on ML model structure, app architecture, and performance tuning.
 
 **Built at**: Good Vibes Only Buildathon 2025  
 **Location**: USC Information Sciences Institute, Marina Del Rey 
@@ -316,10 +327,6 @@ Special thanks to all mentors and organizers who made this possible!
 **Mustafa Nomair**  
 - Email: nomair@usc.edu
 - LinkedIn: [View Profile](https://www.linkedin.com/in/mustafa-nomair)
-- Project Demo: [Insert Video Link](https://drive.google.com/file/d/1XPNRzenzS-k5-pO7UJ3PRrQrqJHE6at7/view?usp=sharing)
-**Project Repository**: [github.com/yourusername/SignSpace](https://github.com/yourusername/SignSpace)
-
-## 🌟 Star This Repo!
-If SignSpace helped you or you believe in making ASL learning accessible, please ⭐ this repository!
+- Project Demo: [Video Link](https://drive.google.com/file/d/1XPNRzenzS-k5-pO7UJ3PRrQrqJHE6at7/view?usp=sharing)
 
 *Making the world more inclusive, one sign at a time.* 🤟
