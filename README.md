@@ -85,7 +85,7 @@ User sees real-time corrections
 - Sub-millimeter accuracy
 - Works in any lighting condition
 
-### 2. **Ghost Hands Overlay**
+### 2. **Ghost Hands Overlay (Unused for now) **
 - Semi-transparent green target hands
 - Shows exact correct position for each sign
 - Updates dynamically as you switch signs
@@ -123,9 +123,9 @@ Currently supports **5 foundational signs**:
 |------|-------------|-----------|
 | **A** | Closed fist, thumb on side | Easy |
 | **B** | Fingers straight up, thumb tucked | Medium |
-| **C** | Hand forms "C" curve | Medium |
+| **C** | Hand forms "C" curve | Easy |
 | **Hello** | Open hand, all fingers extended | Easy |
-| **Thank You** | Flat hand, fingers together | Easy |
+| **Thank You** | Flat hand, fingers together | Medium |
 
 **Future**: Full alphabet (26 letters) + 50+ common phrases
 
@@ -254,7 +254,7 @@ var useMockData = false  // Real Vision Pro hand tracking
 
 ## 🔮 Future Roadmap
 
-### Phase 1 (MVP - Completed ✅)
+### Phase 1 (MVP - Completed)
 - [x] Hand tracking implementation
 - [x] 5 basic ASL signs
 - [x] Ghost hands overlay
@@ -321,4 +321,5 @@ Special thanks to all mentors and organizers who made this possible!
 
 ## 🌟 Star This Repo!
 If SignSpace helped you or you believe in making ASL learning accessible, please ⭐ this repository!
+
 *Making the world more inclusive, one sign at a time.* 🤟
