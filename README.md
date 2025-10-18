@@ -299,7 +299,7 @@ We welcome contributions! Here's how:
 ## 👥 Team
 
 **Mustafa Nomair** – Computer Science @ USC  
-*Led full product development — from design and coding to gesture detection, feedback logic, and Vision Pro app integration.*
+*Led full product development — from design and coding to gesture detection, feedback logic, and Vision Pro app integration alongside Abdelaziz.*
 
 **Abdelaziz Abderhman** – Computer Science @ USC  
 *Handled Vision Pro hardware setup and sensor integration for real-time hand tracking.*
