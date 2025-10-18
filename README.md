@@ -298,28 +298,20 @@ We welcome contributions! Here's how:
 
 ## 👥 Team
 
-**Mustafa Nomair** - Computer Science @ USC 
+**Mustafa Nomair** – Computer Science @ USC  
+*Led full product development — from design and coding to gesture detection, feedback logic, and Vision Pro app integration.*
 
-*Led full product development -- from design and coding to gesture detection, feedback logic, and Vision Pro app integration alongside Abdelaziz. I'm interested in inclusive communication and accessible technology!*
-**Abdelaziz Abderhman** - Electrical and Computer Engineering @ USC @ USC 
-
+**Abdelaziz Abderhman** – Computer Science @ USC  
 *Handled Vision Pro hardware setup and sensor integration for real-time hand tracking.*
 
-**Hamza Wako** - Computer Science and Business Administration @ USC 
-
-*Served as project manager, coordinating tasks, deadlines, and testing cycles.*
-
-**Ardysatrio Fakhri Haroen** - Computer Science (M.S.) @ USC 
-
-*Mentored the team on ML model structure, app architecture, and performance tuning.*
-
-**Ahmed Ataelfadeel** - Electrical and Computer Engineering @ USC   
-
+**Ahmed Ataelfadeel** – Computer Science @ USC  
 *Assisted with hardware connectivity under Abdelaziz’s guidance.*
 
-Ardysatrio Fakhri Haroen – Computer Science (M.S.) @ USC
+**Hamza Wako** – Computer Science @ USC  
+*Served as project manager, coordinating tasks, deadlines, and testing cycles.*
 
-Mentored the team on ML model structure, app architecture, and performance tuning.
+**Ardysatrio Fakhri Haroen** – Computer Science (M.S.) @ USC  
+*Mentored the team on ML model structure, app architecture, and performance tuning.*
 
 **Built at**: Good Vibes Only Buildathon 2025  
 **Location**: USC Information Sciences Institute, Marina Del Rey 
