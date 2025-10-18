@@ -85,7 +85,7 @@ User sees real-time corrections
 - Sub-millimeter accuracy
 - Works in any lighting condition
 
-### 2. **Ghost Hands Overlay (Unused for now) **
+### 2. **Ghost Hands Overlay (Unused for now)**
 - Semi-transparent green target hands
 - Shows exact correct position for each sign
 - Updates dynamically as you switch signs
@@ -125,7 +125,7 @@ Currently supports **5 foundational signs**:
 | **B** | Fingers straight up, thumb tucked | Medium |
 | **C** | Hand forms "C" curve | Easy |
 | **Hello** | Open hand, all fingers extended | Easy |
-| **Thank You** | Flat hand, fingers together | Medium |
+| **Thank You** | Flat hand, fingers together (our version for testing) | Medium |
 
 **Future**: Full alphabet (26 letters) + 50+ common phrases
 
@@ -301,13 +301,13 @@ We welcome contributions! Here's how:
 **Mustafa Nomair** – Computer Science @ USC  
 *Led full product development — from design and coding to gesture detection, feedback logic, and Vision Pro app integration alongside Abdelaziz.*
 
-**Abdelaziz Abderhman** – Computer Science @ USC  
+**Abdelaziz Abderhman** – Electrical and Computer Engineering B.S. & Computer Engineering M.S. @ USC  
 *Handled Vision Pro hardware setup and sensor integration for real-time hand tracking.*
 
-**Ahmed Ataelfadeel** – Computer Science @ USC  
+**Ahmed Ataelfadeel** – Electrical and Computer Engineering @ USC  
 *Assisted with hardware connectivity under Abdelaziz’s guidance.*
 
-**Hamza Wako** – Computer Science @ USC  
+**Hamza Wako** – Computer Science and Business Administration @ USC  
 *Served as project manager, coordinating tasks, deadlines, and testing cycles.*
 
 **Ardysatrio Fakhri Haroen** – Computer Science (M.S.) @ USC  
@@ -322,6 +322,7 @@ We welcome contributions! Here's how:
 - **Lovable** - Technology partner and credits
 - **Meta** - Judge participation
 - **Microsoft** - Inclusive Tech Lab inspiration
+- **Apple** - Apple Vision Pro access 
 Special thanks to all mentors and organizers who made this possible!
 
 ## 📞 Contact
