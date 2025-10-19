@@ -33,12 +33,15 @@ Built at USC's **Good Vibes Only Buildathon 2025** | a16z x PayPal x Lovable x M
 
 Below are screenshots from SignSpace running on Apple Vision Pro, showcasing live hand tracking, sign detection, and interactive feedback.
 
-| Sign A Detection | Sign B Detection |
-|:----------------:|:----------------:|
-| ![SignSpace detecting Sign A](./images/VisionProA.png) | ![SignSpace detecting Sign B](./images/VisionProB.png) |
+#### 🅰️ Sign A Detection
+![SignSpace detecting Sign A](./images/VisionProA.png)
 
-*Left: System detecting the sign for “A” with feedback accuracy bar.  
-Right: User performing the sign “B,” with real-time gesture overlay and feedback display.*
+*System detecting the sign for “A” with feedback accuracy bar.*
+
+#### 🅱️ Sign B Detection
+![SignSpace detecting Sign B](./images/VisionProB.png)
+
+*User performing the sign “B,” with real-time gesture overlay and feedback display.*
 
 ### Key Features Showcased
 1. Hand tracking initialization  
