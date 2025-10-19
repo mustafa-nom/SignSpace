@@ -4,145 +4,152 @@
 
 **Learn American Sign Language with instant, personalized feedback using spatial computing.**
 
-Built at **Good Vibes Only Buildathon 2025** | USC x PayPal x Lovable x META x Apple
+Built at USC's **Good Vibes Only Buildathon 2025** | a16z x PayPal x Lovable x META x Apple
 
 ## 🎯 The Problem
 
-- **430 million people worldwide** need hearing support and rehabilitation
-- **500,000+ people** in the US use American Sign Language
-- Learning ASL is challenging without real-time, personalized feedback
-- Traditional methods (videos, books) lack interactive guidance
-- No way to verify if you're making signs correctly
+- **430 million people worldwide** need hearing support and rehabilitation  
+- **500,000+ people** in the US use American Sign Language  
+- Learning ASL is challenging without real-time, personalized feedback  
+- Traditional methods (videos, books) lack interactive guidance  
+- No way to verify if you're making signs correctly  
 
 ## 💡 Our Solution
 
 **SignSpace** leverages Apple Vision Pro's advanced hand tracking to provide:
 
-- **Real-time gesture recognition** - Detects ASL signs with 90Hz precision
-- **Ghost hands overlay** - Transparent "target" hands show the correct position
-- **Specific, actionable feedback** - "Move your thumb closer to your palm" instead of generic errors
-- **Progress tracking** - Visual indicators showing mastery of each sign
-- **Spatial visualization** - 3D hand skeleton with joint-level accuracy
-
+- **Real-time gesture recognition** – Detects ASL signs using ML-based classification  
+- **Specific, actionable feedback** – “Move your thumb closer to your palm” instead of generic errors  
+- **Progress tracking** – Visual indicators showing mastery of each sign  
+- **Spatial visualization** – 3D hand skeleton with joint-level accuracy
+- **Ghost hands overlay (Unused for now)** – Transparent “target” hands show the correct position (will be expanded upon in the next update) 
 
 ## 🎥 Demo
 
 > **[Demo Video Link Here](https://drive.google.com/file/d/1XPNRzenzS-k5-pO7UJ3PRrQrqJHE6at7/view?usp=sharing)**
 
-### Key Features Showcased:
-1. Hand tracking initialization
-2. Learning letter "A" with instant feedback
-3. Ghost hands overlay guiding hand position
-4. Real-time corrections and validation
-5. Progress through 5 ASL signs
-6. Celebratory confetti on mastery
+### Key Features Showcased
+1. Hand tracking initialization  
+2. Learning letter "A" with instant feedback  
+3. Real-time corrections and validation  
+4. Progress through 5 ASL signs  
+5. Celebratory confetti on mastery  
 
 ## 🛠️ Technology Stack
 
 ### Core Technologies
-- **visionOS 2.5** - Native Apple Vision Pro development
-- **Swift 5.9** - Modern, type-safe programming
-- **SwiftUI** - Declarative UI framework
-- **RealityKit** - 3D rendering and spatial computing
-- **Hand Tracking API** - 90Hz, 27-joint precision tracking
+- **visionOS 2.5** – Native Apple Vision Pro development  
+- **Swift 5.9** – Modern, type-safe programming  
+- **SwiftUI** – Declarative UI framework  
+- **RealityKit** – 3D rendering and spatial computing  
+- **Hand Tracking API** – Real-time 27-joint precision tracking  
+- **Core ML** – Integrated ASL gesture classifier  
 
 ### Key Features
-- **Custom Gesture Recognition Engine** - Rule-based ASL sign detection
-- **Spatial Hand Visualization** - 3D skeleton rendering with joint connections
-- **Adaptive Feedback System** - Confidence-based color coding (red/yellow/green)
-- **Mock Data Support** - Simulator testing without physical hardware
+- **Rule-Based + ML Gesture Recognition Engine** – Combines CoreML model with rule-based validation  
+- **Spatial Hand Visualization** – 3D skeleton rendering with joint connections  
+- **Adaptive Feedback System** – Confidence-based color coding (red/yellow/green)  
+- **CSV Export + Share Sheet** – Export recorded samples for model retraining  
+- **Mock Data Support** – Simulator testing without physical hardware  
 
 ## 🏗️ Architecture
 ```
 SignSpace/
-├── SignSpaceApp.swift              # App entry point
-├── ContentView.swift                # Main UI + hand visualization
-├── HandTrackingManager.swift        # Hand tracking abstraction (real + mock)
-├── GestureRecognizer.swift          # ASL gesture detection + feedback
-├── GhostHandData.swift              # Ideal hand positions for each sign
-├── SoundManager.swift               # Audio feedback system
-└── AppModel.swift                   # App state management
+├── SignSpaceApp.swift # App entry point + immersive space setup
+├── AppModel.swift # App state management
+├── ContentView.swift # Main learning UI + feedback logic
+├── ConfettiView.swift # Confetti animation when sign mastered
+├── DataCollectionView.swift # Data collection & CSV export interface
+├── CSVExporter.swift # Session data tracking & CSV writer
+├── GestureRecognizer.swift # Rule-based ASL gesture recognition
+├── MLGestureRecognizer.swift # CoreML-based gesture prediction
+├── GhostHandData.swift # Ideal hand joint positions per sign 
+├── HandTrackingManager.swift # ARKit session + real-time hand tracking
+├── HandTrackingComponent.swift # RealityKit component for hand entities
+├── HandTrackingSystem.swift # System managing ARKit anchor updates
+├── HandTrackingView.swift # 3D hand entity rendering view
+├── ImmersiveView.swift # RealityView for immersive mode
+├── SoundManager.swift # Audio feedback for success/errors
+├── ToggleImmersiveSpaceButton.swift # Button to toggle immersive view
+└── Assets/ # ASL sign images + app assets
 ```
 
 ### Data Flow
 ```
 Vision Pro Hand Tracking
-    ↓
+        ↓
 HandTrackingManager (extracts 27 joints)
-    ↓
-GestureRecognizer (analyzes positions)
-    ↓
-ContentView (displays feedback + ghost hands)
-    ↓
-User sees real-time corrections
+        ↓
+MLGestureRecognizer + GestureRecognizer (classifies + validates)
+        ↓
+ContentView (shows confidence, feedback, confetti)
+        ↓
+User sees real-time corrections + progress tracking
 ```
+
 
 ## 🎨 Features
 
 ### 1. **Real-Time Hand Tracking**
-- 90Hz update rate
-- 27 joint points per hand
-- Sub-millimeter accuracy
-- Works in any lighting condition
+- Powered by `ARKitSession` and `HandTrackingProvider`
+- 27 tracked joints with live position updates
+- Works seamlessly in immersive space
 
-### 2. **Ghost Hands Overlay (Unused for now)**
-- Semi-transparent green target hands
-- Shows exact correct position for each sign
-- Updates dynamically as you switch signs
-- User "traces" ghost hands to learn
+### 2. **Ghost Hands Overlay**
+- Shows ideal ASL hand positions (from `GhostHandData`)
+- Used for reference and spatial guidance  
 
-### 3. **Intelligent Feedback System**
-- **Green (85%+ confidence)**: "Perfect! 🎉"
-- **Yellow (65-85%)**: "Almost there! Move thumb closer"
-- **Red (<65%)**: "Curl your index finger into your palm"
-- **Gray**: "Show your hand to the camera"
+### 3. **Dual Recognition System**
+- **Rule-based:** geometry & distances between joints  
+- **ML-powered:** CoreML model trained from real CSV data  
 
-### 4. **3D Skeleton Visualization**
-- Connects joints with lines
-- Blue for user's hands
-- Green for target hands
-- Professional medical-grade rendering
+### 4. **Intelligent Feedback**
+- **Green (≥85%)**: Perfect! 🎉  
+- **Yellow (65–85%)**: Almost there!  
+- **Red (<65%)**: Needs correction  
+- **Gray**: No hand detected  
 
-### 5. **Progress Tracking**
-- Visual progress bar (0/5 → 5/5)
-- Tracks which signs mastered
-- Confetti celebration on completion
-- Per-sign confidence percentage
+### 5. **Progress Tracking & Celebration**
+- Tracks completed signs  
+- Displays progress bar  
+- Confetti on completion  
 
-### 6. **Sound Effects**
-- Success tone (correct sign)
-- Progress tone (getting closer)
-- Error buzz (incorrect position)
-- System haptic feedback
+### 6. **Sound Feedback**
+- Success tone (correct)  
+- Progress tone (improving)  
+- Error tone (incorrect)  
+
+### 7. **Data Collection & Export**
+- Record hand samples for each sign  
+- Export labeled CSV for training CoreML models  
+- Share sheet for direct file sharing  
 
 ## 📚 Supported ASL Signs
 
-Currently supports **5 foundational signs**:
-
 | Sign | Description | Difficulty |
-|------|-------------|-----------|
+|------|-------------|-------------|
 | **A** | Closed fist, thumb on side | Easy |
 | **B** | Fingers straight up, thumb tucked | Medium |
 | **C** | Hand forms "C" curve | Easy |
 | **Hello** | Open hand, all fingers extended | Easy |
-| **Thank You** | Flat hand, fingers together (our version for testing) | Medium |
+| **Thank You** | Flat hand, fingers together (custom sign for testing) | Medium |
 
-**Future**: Full alphabet (26 letters) + 50+ common phrases
+**Future:** Expand to full alphabet and 50+ phrases  
 
 ## 🚀 Getting Started
 
 ### Prerequisites
-- macOS 14.0 or later
-- Xcode 15.0 or later
-- Apple Vision Pro (for real device testing)
-- Apple Developer account (free tier works)
+- macOS 14.0 or later  
+- Xcode 15.0 or later  
+- Apple Vision Pro (for real testing)  
+- Apple Developer account  
 
 ### Installation
-
-1. **Clone the repository**
+1. **Install repo**
 ```bash
-   git clone https://github.com/yourusername/SignSpace.git
-   cd SignSpace
+git clone https://github.com/yourusername/SignSpace.git
+cd SignSpace
+open SignSpace.xcodeproj
 ```
 
 2. **Open in Xcode**
@@ -177,108 +184,79 @@ var useMockData = false  // Real Vision Pro hand tracking
 ### Hand Tracking Pipeline
 
 1. **Initialize Session**
-   - Request hand tracking authorization
-   - Start ARKitSession with HandTrackingProvider
-   - Begin processing anchor updates at 90Hz
+   - Requests `handTracking` authorization from ARKit.
+   - Starts `ARKitSession` with `HandTrackingProvider`.
+   - Continuously processes anchor updates at 90Hz for both hands.
 
 2. **Extract Joint Data**
-   - 27 joints per hand: wrist, 5 fingers × 5 joints each
-   - Convert from anchor space to world space
-   - Store as SIMD3<Float> positions
+   - Captures 27 joints per hand: wrist, thumb, index, middle, ring, and pinky.
+   - Converts joint transforms to world coordinates using `originFromAnchorTransform`.
+   - Stores as `SIMD3<Float>` for spatial calculations.
 
 3. **Gesture Recognition**
-   - Calculate distances between key joints
-   - Compare to predefined thresholds
-   - Determine which sign (if any) is being made
+   - Two engines work in parallel:
+     - **Rule-based**: Uses distances and angles between joints for precision feedback.
+     - **ML-powered**: CoreML model (`ASLClassifierReal1.mlmodel`) predicts gestures from 12 extracted features (6 joints × 2D coordinates).
+   - Combines both methods for accurate and interpretable recognition.
 
 4. **Generate Feedback**
-   - Analyze WHY sign is incorrect
-   - Provide specific correction instructions
-   - Calculate confidence score (0-100%)
+   - Calculates a confidence score (0–1).
+   - Produces contextual feedback:
+     - “Perfect!” if confidence > 0.9  
+     - “Good try!” if 0.6–0.9  
+     - “Show your hand” if tracking is lost
+   - Feedback color dynamically updates (green/yellow/red/gray).
 
 5. **Render Visualization**
-   - Draw ghost hands at ideal positions
-   - Draw user's hands at actual positions
-   - Connect joints with skeleton lines
-   - Color-code based on accuracy
+   - `RealityView` displays real-time 3D hand skeletons.
+   - `GhostHandData` overlays “ideal” hand position for the current sign.
+   - Visual and audio cues provide instant correction guidance.
+
+6. **Track Progress**
+   - `ContentView` maintains user progress via `signsLearned` state.
+   - Confetti and success sound trigger on first mastery.
+   - Progress indicators fill based on completed signs.
+
+7. **Data Collection Mode**
+   - Switch to `DataCollectionView` for ML training.
+   - Captures hand features for each ASL sign and saves them as CSV.
+   - Built-in `ShareSheet` enables exporting data directly.
 
 ## 🏆 Technical Highlights
 
 ### Why This Showcases Vision Pro
-
-1. **Hand Tracking Excellence**
-   - Uses Vision Pro's strongest feature
-   - No external cameras needed
-   - Privacy-preserving (processed locally)
-
-2. **Spatial Computing**
-   - 3D visualization in real space
-   - Ghost hands feel like physical objects
-   - Natural interaction paradigm
-
-3. **Real-Time Performance**
-   - 90Hz tracking + 60fps rendering
-   - Zero latency feedback
-   - Smooth skeleton animations
-
-4. **Accessibility-First Design**
-   - Makes ASL learning accessible to all
-   - Removes barriers of traditional methods
-   - Inclusive technology demonstrating "solve for one, extend to many"
-
-## 📊 Impact & Market Opportunity
-
-### Target Users
-- **500K+** ASL users in the United States
-- **Millions** learning ASL (family, friends, educators)
-- **Special education teachers** (differentiated instruction)
-- **Special Olympics athletes** (45% have hearing/vision impairments)
-
-### Use Cases
-- **Families** with deaf/HOH members
-- **Schools** teaching ASL as second language
-- **Therapy centers** for speech pathology
-- **Corporate training** for ADA compliance
-
-### Business Model
-- **Freemium**: Basic signs free, advanced content paid
-- **B2C**: $9.99/month individual subscription
-- **B2B**: $199/month for institutional licenses (schools, hospitals)
-- **B2G**: ADA compliance tool for government services
-
-### Competitive Advantage
-- Only spatial computing ASL app
-- Real-time 3D feedback (vs 2D videos)
-- Personalized corrections (vs generic tutorials)
-- Gamified progress tracking
+- **Native Hand Tracking:** Uses Vision Pro’s most advanced capability without external hardware, being privacy-preserving (processed locally).  
+- **Spatial Feedback Loop:** Ghost hands are anchored in 3D space, enabling natural alignment.  
+- **Real-Time Performance:** 90Hz input rate with <10ms latency feedback pipeline.  
+- **On-Device ML:** All gesture processing is performed locally using CoreML for privacy and speed.  
+- **Immersive Accessibility-First Learning:** Users learn through kinesthetic feedback rather than static visuals, making ASL learning accessible to all.  
 
 ## 🔮 Future Roadmap
 
-### Phase 1 (MVP - Completed)
-- [x] Hand tracking implementation
-- [x] 5 basic ASL signs
-- [x] Ghost hands overlay
-- [x] Real-time feedback
-- [x] Progress tracking
+## 🔮 Future Roadmap
+
+### Phase 1 (MVP – Completed)
+- [x] Vision Pro hand tracking integration  
+- [x] CoreML gesture recognition (5 signs)  
+- [x] Visual and audio feedback system  
+- [x] Confetti + progress tracking  
+- [x] CSV export for model retraining  
 
 ### Phase 2 (Next 3 Months)
-- [ ] Full alphabet (26 letters)
-- [ ] 50+ common phrases
-- [ ] CoreML model for improved accuracy
-- [ ] Lesson structure with curriculum
-- [ ] Statistics dashboard
+- [ ] Full ASL alphabet coverage  
+- [ ] Improved CoreML accuracy with larger dataset 
+- [ ] Lesson-based user flow  
+- [ ] Advanced analytics dashboard  
 
 ### Phase 3 (6 Months)
-- [ ] Multiplayer mode (SharePlay)
-- [ ] Record/playback practice sessions
-- [ ] Integration with Brisk Teaching platform
-- [ ] Additional sign languages (BSL, LSF)
+- [ ] SharePlay multiplayer mode  
+- [ ] Video recording and playback  
+- [ ] BSL/LSF language expansion  
 
 ### Phase 4 (12 Months)
-- [ ] Enterprise partnerships (schools, hospitals)
-- [ ] Research collaboration (USC deaf studies)
-- [ ] Special Olympics integration
-- [ ] iOS companion app (practice tracking)
+- [ ] Enterprise integration (schools, hospitals)  
+- [ ] Collaboration with accessibility researchers  
+- [ ] iOS companion app for progress tracking
 
 ## 🤝 Contributing
 We welcome contributions! Here's how:
