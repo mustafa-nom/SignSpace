@@ -12,7 +12,7 @@ Built at USC's **Good Vibes Only Buildathon 2025** | a16z x PayPal x Lovable x M
 - **500,000+ people** in the US use American Sign Language  
 - Learning ASL is challenging without real-time, personalized feedback  
 - Traditional methods (videos, books) lack interactive guidance  
-- No way to verify if you're making signs correctly  
+- No way to verify if you're making signs correctly 
 
 ## 💡 Our Solution
 
@@ -26,7 +26,10 @@ Built at USC's **Good Vibes Only Buildathon 2025** | a16z x PayPal x Lovable x M
 
 ## 🎥 Demo
 
-> **[Demo Video Link Here](https://drive.google.com/file/d/1XPNRzenzS-k5-pO7UJ3PRrQrqJHE6at7/view?usp=sharing)**
+> 🎥 **[Demo Video](https://drive.google.com/file/d/1XPNRzenzS-k5-pO7UJ3PRrQrqJHE6at7/view?usp=sharing)**  
+> 📺 **[Full Version (if Demo doesn’t load)](https://drive.google.com/file/d/1C_VZJxxrgt15Y8MPfRmrAKQ1d2wWfaRr/view?usp=sharing)**  
+
+**Note:** In the full-length video, you’ll notice that the gesture recognition model was trained on the specific placement of my hands — around 100 samples per sign. Because of that, the system only recognized gestures when they closely matched the hand positions seen during training. As a result, even when a sign was formed correctly, it might not register unless positioned identically to the training data. Additionally, the current ML gesture recognizer sometimes uses confidence values from other signs when generating feedback. For example, it might detect a sign as “A” and suggest “Try making C,” even when the sign was actually “C.” We plan to refine this by aligning the text-based feedback with the same level of specificity and accuracy as the rule-based mock data system, ensuring truly actionable, real-time corrections.
 
 ### Key Features Showcased
 1. Hand tracking initialization  
