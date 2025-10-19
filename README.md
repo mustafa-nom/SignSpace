@@ -236,8 +236,6 @@ var useMockData = false  // Real Vision Pro hand tracking
 
 ## 🔮 Future Roadmap
 
-## 🔮 Future Roadmap
-
 ### Phase 1 (MVP – Completed)
 - [x] Vision Pro hand tracking integration  
 - [x] CoreML gesture recognition (5 signs)  
