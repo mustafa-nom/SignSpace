@@ -1,4 +1,4 @@
-# SignSpace - Real-Time ASL Learning with Apple Vision Pro
+# SignSpace - Real-Time ASL Tutor with Apple Vision Pro
 
 ![SignSpace Banner](https://img.shields.io/badge/visionOS-2.5-blue) ![Swift](https://img.shields.io/badge/Swift-5.9-orange) ![License](https://img.shields.io/badge/license-MIT-green)
 
