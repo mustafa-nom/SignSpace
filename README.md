@@ -39,7 +39,7 @@ Below are screenshots from SignSpace running on Apple Vision Pro, showcasing liv
 *System detecting the sign for “A” with feedback accuracy bar.*
 
 #### 🅱️ Sign B Detection
-![SignSpace detecting Sign B](./images/VisionProB.png)
+![SignSpace detecting Sign B](./images/VisonProB.png)
 
 *User performing the sign “B,” with real-time gesture overlay and feedback display.*
 
