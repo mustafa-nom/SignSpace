@@ -167,17 +167,12 @@ cd SignSpace
 open SignSpace.xcodeproj
 ```
 
-2. **Open in Xcode**
-```bash
-   open SignSpace.xcodeproj
-```
-
-3. **Add Hand Tracking Capability**
+2. **Add Hand Tracking Capability**
    - Select SignSpace project → Target → Signing & Capabilities
    - Click "+ Capability"
    - Add "Hand Tracking"
 
-4. **Build and Run**
+3. **Build and Run**
    - Select "Apple Vision Pro" simulator or physical device
    - Press `Cmd + R`
 
