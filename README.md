@@ -31,6 +31,15 @@ Built at USC's **Good Vibes Only Buildathon 2025** | a16z x PayPal x Lovable x M
 
 **Note:** In the full-length video, you’ll notice that the gesture recognition model was trained on the specific placement of my hands — around 100 samples per sign. Because of that, the system only recognized gestures when they closely matched the hand positions seen during training. As a result, even when a sign was formed correctly, it might not register unless positioned identically to the training data. Additionally, the current ML gesture recognizer sometimes uses confidence values from other signs when generating feedback. For example, it might detect a sign as “A” and suggest “Try making C,” even when the sign was actually “C.” We plan to refine this by aligning the text-based feedback with the same level of specificity and accuracy as the rule-based mock data system, ensuring truly actionable, real-time corrections.
 
+Below are screenshots from SignSpace running on Apple Vision Pro, showcasing live hand tracking, sign detection, and interactive feedback.
+
+| Sign A Detection | Sign B Detection |
+|:----------------:|:----------------:|
+| ![SignSpace detecting Sign A](./images/VisionProA.png) | ![SignSpace detecting Sign B](./images/VisionProB.png) |
+
+*Left: System detecting the sign for “A” with feedback accuracy bar.  
+Right: User performing the sign “B,” with real-time gesture overlay and feedback display.*
+
 ### Key Features Showcased
 1. Hand tracking initialization  
 2. Learning letter "A" with instant feedback  
