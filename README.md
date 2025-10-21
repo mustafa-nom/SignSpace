@@ -60,13 +60,6 @@ Below are screenshots from **SignSpace** running on Apple Vision Pro, showcasing
   <em><strong>Data Recording Mode:</strong> Used to capture 100 samples per gesture for training the ML model, with clear on-screen instructions for proper hand positioning and motion.</em>
 </p>
 
-### Key Features Showcased
-1. Hand tracking initialization  
-2. Learning letter "A" with instant feedback  
-3. Real-time corrections and validation  
-4. Progress through 5 ASL signs  
-5. Celebratory confetti on mastery  
-
 ## 🛠️ Technology Stack
 
 ### Core Technologies
