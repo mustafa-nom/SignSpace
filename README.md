@@ -29,9 +29,10 @@ Built at USC's **Good Vibes Only Buildathon 2025** | a16z x PayPal x Lovable x M
 > 🎥 **[Demo Video](https://drive.google.com/file/d/1XPNRzenzS-k5-pO7UJ3PRrQrqJHE6at7/view?usp=sharing)**  
 > 📺 **[Full Version (if Demo doesn’t load)](https://drive.google.com/file/d/1C_VZJxxrgt15Y8MPfRmrAKQ1d2wWfaRr/view?usp=sharing)**  
 
-**Note:** In the full-length video, you’ll notice that the gesture recognition model was trained on the specific placement of my hands — around 100 samples per sign. Because of that, the system only recognized gestures when they closely matched the hand positions seen during training. As a result, even when a sign was formed correctly, it might not register unless positioned identically to the training data. Additionally, the current ML gesture recognizer sometimes uses confidence values from other signs when generating feedback. For example, it might detect a sign as “A” and suggest “Try making C,” even when the sign was actually “C.” We plan to refine this by aligning the text-based feedback with the same level of specificity & accuracy as the rule-based mock data system (shown in the third image for reference), ensuring truly actionable, real-time corrections.
+**Note:** In the full-length video, you’ll notice that the gesture recognition model was trained on specific hand placements (around 100 samples per sign). Because of that, the system only recognized gestures when they closely matched the positions seen during training. Additionally, the current ML recognizer occasionally references confidence values from other signs when generating feedback -- e.g., it might detect “A” and suggest “Try making C.” Future updates will align the ML feedback system with the same specificity and accuracy as the rule-based mock data version (shown below).
 
-### 🖐️ Vision Pro Demo Screenshots
+
+### 📸 Vision Pro In-Action
 
 Below are screenshots from **SignSpace** running on Apple Vision Pro, showcasing live hand tracking, sign detection, and interactive feedback.
 
@@ -50,8 +51,7 @@ Below are screenshots from **SignSpace** running on Apple Vision Pro, showcasing
 <p align="center">
   <img src="./images/MockDataASL.png" width="75%" alt="SignSpace detecting the sign Hello"/>
   <br/>
-  <em><strong>Sign Detection Mode:</strong> The app detects the sign “Hello” using Apple Vision Pro’s 3D hand tracking and provides real-time, specific feedback (“Extend your index finger straight up”). 
-  <br/>Currently, this detailed feedback is available only in the mock data view, with live integration in progress.</em>
+  <em><strong>Sign Detection Mode:</strong> The app detects the sign “Hello” using Apple Vision Pro’s 3D hand tracking and provides real-time, specific feedback (“Extend your index finger straight up”). Currently, this detailed feedback is available only in the mock data view, with live integration in progress.</em>
 </p>
 
 <p align="center">
@@ -333,5 +333,8 @@ Special thanks to all mentors and organizers who made this possible!
 - Email: nomair@usc.edu
 - LinkedIn: [View Profile](https://www.linkedin.com/in/mustafa-nomair)
 - Project Demo: [Video Link](https://drive.google.com/file/d/1XPNRzenzS-k5-pO7UJ3PRrQrqJHE6at7/view?usp=sharing)
+
+## ⭐ Support
+If you enjoyed this project or found it useful, consider giving it a ⭐ on GitHub - it helps others discover SignSpace!
 
 *Making the world more inclusive, one sign at a time.* 🤟
