@@ -4,7 +4,7 @@
 
 **Learn American Sign Language with instant, personalized feedback using spatial computing.**
 
-Built at USC's **Good Vibes Only Buildathon 2025** | a16z x PayPal x Lovable x META x Apple
+Built at USC's **Good Vibes Only Buildathon 2025** | a16z x PayPal x Lovable x Meta x Apple
 
 ## 🎯 The Problem
 
@@ -120,7 +120,7 @@ User sees real-time corrections + progress tracking
 - 27 tracked joints with live position updates
 - Works seamlessly in immersive space
 
-### 2. **Ghost Hands Overlay**
+### 2. **Ghost Hands Overlay (unused for now)**
 - Shows ideal ASL hand positions (from `GhostHandData`)
 - Used for reference and spatial guidance  
 
