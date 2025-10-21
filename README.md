@@ -31,28 +31,33 @@ Built at USC's **Good Vibes Only Buildathon 2025** | a16z x PayPal x Lovable x M
 
 **Note:** In the full-length video, you’ll notice that the gesture recognition model was trained on the specific placement of my hands — around 100 samples per sign. Because of that, the system only recognized gestures when they closely matched the hand positions seen during training. As a result, even when a sign was formed correctly, it might not register unless positioned identically to the training data. Additionally, the current ML gesture recognizer sometimes uses confidence values from other signs when generating feedback. For example, it might detect a sign as “A” and suggest “Try making C,” even when the sign was actually “C.” We plan to refine this by aligning the text-based feedback with the same level of specificity & accuracy as the rule-based mock data system (shown in the third image for reference), ensuring truly actionable, real-time corrections.
 
-Below are screenshots from SignSpace running on Apple Vision Pro, showcasing live hand tracking, sign detection, and interactive feedback.
+### 🖐️ Vision Pro Demo Screenshots
 
-#### 🅰️ Sign A Detection
-![SignSpace detecting Sign A](./images/VisionProA.png)
+Below are screenshots from **SignSpace** running on Apple Vision Pro, showcasing live hand tracking, sign detection, and interactive feedback.
 
-*System detecting the sign for “A” with feedback accuracy bar.*
+<p align="center">
+  <img src="./images/VisionProA.png" width="75%" alt="SignSpace detecting Sign A"/>
+  <br/>
+  <em><strong>Sign A Detection:</strong> The system recognizes the sign “A” and provides a visual feedback bar indicating accuracy.</em>
+</p>
 
-#### 🅱️ Sign B Detection
-![SignSpace detecting Sign B](./images/VisonProB.png)
-
-*User performing the sign “B,” with real-time gesture overlay and feedback display.*
+<p align="center">
+  <img src="./images/VisonProB.png" width="75%" alt="SignSpace detecting Sign B"/>
+  <br/>
+  <em><strong>Sign B Detection:</strong> The user performs the sign “B,” with real-time 3D gesture overlay and feedback display.</em>
+</p>
 
 <p align="center">
   <img src="./images/MockDataASL.png" width="75%" alt="SignSpace detecting the sign Hello"/>
   <br/>
-  <em><strong>Sign Detection Mode:</strong> The app detects the sign for “Hello” using Apple Vision Pro’s 3D hand tracking and gives real-time, specific feedback (“Extend your index finger straight up”). Note that this specific feedback is currently available only in the mock data view and integration with the live gesture recognition system is in progress. </em>
+  <em><strong>Sign Detection Mode:</strong> The app detects the sign “Hello” using Apple Vision Pro’s 3D hand tracking and provides real-time, specific feedback (“Extend your index finger straight up”). 
+  <br/>Currently, this detailed feedback is available only in the mock data view, with live integration in progress.</em>
 </p>
 
 <p align="center">
   <img src="./images/RecordingDataASL.png" width="75%" alt="SignSpace recording gesture samples"/>
   <br/>
-  <em><strong>Data Recording Mode:</strong> Used to capture 100 samples per gesture for training the ML model, with clear step-by-step on-screen guidance.</em>
+  <em><strong>Data Recording Mode:</strong> Used to capture 100 samples per gesture for training the ML model, with clear on-screen instructions for proper hand positioning and motion.</em>
 </p>
 
 ### Key Features Showcased
