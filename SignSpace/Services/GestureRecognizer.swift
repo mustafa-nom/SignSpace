@@ -6,21 +6,6 @@
 import Foundation
 import simd
 
-enum ASLSign: String, CaseIterable {
-    case A = "A"
-    case B = "B"
-    case C = "C"
-    case Hello = "Hello"
-    case ThankYou = "Thank You"
-    case none = "none"
-}
-
-struct GestureResult {
-    let sign: ASLSign
-    let confidence: Float
-    let feedback: String
-}
-
 final class GestureRecognizer {
 
     func detectSign(from hand: HandData?) -> GestureResult {

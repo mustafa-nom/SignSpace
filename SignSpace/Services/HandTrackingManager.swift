@@ -2,6 +2,7 @@ import Foundation
 import RealityKit
 import ARKit
 import Observation
+import SwiftUI
 
 @MainActor
 @Observable
@@ -41,37 +42,25 @@ final class HandTrackingManager {
             self.arkitSession = session
             self.handTrackingProvider = provider
             
-            // Request authorization
             print("🔐 Requesting hand tracking authorization...")
             let auth = await session.requestAuthorization(for: [.handTracking])
-            
             guard auth[.handTracking] == .allowed else {
                 print("❌ Hand tracking authorization DENIED")
                 return
             }
             print("✅ Hand tracking authorized!")
             
-            // Run the session
-            print("▶️ Running ARKit session...")
             try await session.run([provider])
             print("✅ ARKit session running!")
             
-            // Monitor hand updates
-            print("👀 Monitoring hand updates...")
             for await update in provider.anchorUpdates {
                 let anchor = update.anchor
                 let handData = extractHandData(from: anchor)
                 
                 if anchor.chirality == .left {
                     leftHand = handData
-                    if handData.isTracked {
-                        print("👈 Left hand tracked: \(handData.joints.count) joints")
-                    }
                 } else {
                     rightHand = handData
-                    if handData.isTracked {
-                        print("👉 Right hand tracked: \(handData.joints.count) joints")
-                    }
                 }
             }
         } catch {
@@ -84,7 +73,6 @@ final class HandTrackingManager {
             return HandData(isTracked: false, joints: [])
         }
         
-        // Key joints we need for gesture recognition
         let jointNames: [HandSkeleton.JointName] = [
             .wrist,
             .thumbTip, .thumbIntermediateTip, .thumbIntermediateBase, .thumbKnuckle,
@@ -108,5 +96,19 @@ final class HandTrackingManager {
         }
         
         return HandData(isTracked: true, joints: joints)
+    }
+}
+
+// MARK: - Environment key
+
+private struct HandTrackingManagerKey: EnvironmentKey {
+    // make it OPTIONAL so we don't have to create a @MainActor value here
+    static let defaultValue: HandTrackingManager? = nil
+}
+
+extension EnvironmentValues {
+    var handTrackingManager: HandTrackingManager? {
+        get { self[HandTrackingManagerKey.self] }
+        set { self[HandTrackingManagerKey.self] = newValue }
     }
 }
