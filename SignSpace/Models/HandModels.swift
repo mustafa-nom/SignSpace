@@ -2,7 +2,6 @@ import simd
 import RealityKit
 import ARKit.hand_skeleton
 
-// Simple model types used across the app
 struct HandJoint: Identifiable, Hashable {
     var id = UUID()
     var name: String
@@ -14,7 +13,7 @@ struct HandData: Hashable {
     var joints: [HandJoint]
 }
 
-// The hand skeleton mapping used by the RealityKit hand spheres system
+// hand skeleton mapping used by the RealityKit hand spheres system
 struct Hand {
     static let joints: [(HandSkeleton.JointName, Finger, Bone)] = [
         (.thumbKnuckle, .thumb, .knuckle),

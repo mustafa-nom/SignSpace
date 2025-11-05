@@ -24,7 +24,7 @@ struct GhostHandData {
         }
     }
     
-    // All positions relative to wrist at origin, using realistic proportions
+    // all positions relative to wrist at origin, using realistic proportions
     
     private static func letterAPositions() -> [HandJoint] {
         return [

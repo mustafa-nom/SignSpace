@@ -16,7 +16,7 @@ import SwiftUI
 class CSVExporter: ObservableObject {
     @Published var exportURL: URL?
     
-    // Track session data
+    // track session data
     struct SessionData {
         let timestamp: Date
         let lessonName: String
@@ -28,7 +28,7 @@ class CSVExporter: ObservableObject {
     
     private var sessions: [SessionData] = []
     
-    // Add a session record
+    // add session record
     func recordSession(lessonName: String, gestureName: String, accuracy: Float, attempts: Int, completed: Bool) {
         let session = SessionData(
             timestamp: Date(),
@@ -41,7 +41,7 @@ class CSVExporter: ObservableObject {
         sessions.append(session)
     }
     
-    // Generate CSV string
+    // generate CSV string
     func generateCSV() -> String {
         var csv = "Timestamp,Lesson,Gesture,Accuracy,Attempts,Completed\n"
         
@@ -63,17 +63,15 @@ class CSVExporter: ObservableObject {
         return csv
     }
     
-    // Export to file
+    // export to file
     func exportToFile() -> URL? {
         let csvString = generateCSV()
         
-        // Create filename with timestamp
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyyMMdd_HHmmss"
         let timestamp = dateFormatter.string(from: Date())
         let filename = "SignSpace_Progress_\(timestamp).csv"
         
-        // Get documents directory
         guard let documentsDirectory = FileManager.default.urls(
             for: .documentDirectory,
             in: .userDomainMask
@@ -95,12 +93,12 @@ class CSVExporter: ObservableObject {
         }
     }
     
-    // Clear all session data
+    // clear all session data
     func clearSessions() {
         sessions.removeAll()
     }
     
-    // Get total sessions count
+    // getter: total sessions count
     func getSessionCount() -> Int {
         return sessions.count
     }

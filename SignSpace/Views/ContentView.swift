@@ -20,7 +20,7 @@ struct ContentView: View {
                             Text("SignSpace")
                                 .font(.largeTitle.bold())
 
-                            Text(handTracker?.useMockData == true ? "🎮 Simulator Mode" : "👋 Vision Pro Mode")
+                            Text(handTracker?.useMockData == true ? "Simulator Mode" : "Vision Pro Mode")
                                 .font(.title3)
                                 .foregroundStyle(.secondary)
 

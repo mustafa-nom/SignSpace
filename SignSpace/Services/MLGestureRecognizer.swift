@@ -2,26 +2,27 @@
 //  MLGestureRecognizer.swift
 //  SignSpace
 //
-//  ML-powered gesture recognition using trained ASL model
+//  ML-powered gesture recognition using a trained ASL Core ML model.
 //
 
 import CoreML
 import Foundation
 
-class MLGestureRecognizer {
-    
+// Performs on-device ASL classification using a Core ML model and returns user-facing feedback.
+final class MLGestureRecognizer {
     private var model: ASLClassifierReal1?
     
     init() {
         let config = MLModelConfiguration()
         if let loadedModel = try? ASLClassifierReal1(configuration: config) {
             model = loadedModel
-            print("✅ ML Model loaded successfully!")
+            print("ML model loaded successfully")
         } else {
-            print("❌ Failed to load ML model.")
+            print("Failed to load ML model")
         }
     }
     
+    // Runs inference on the provided hand data and returns the sign prediction
     func detectSign(from hand: HandData?) -> GestureResult {
         guard let hand = hand, hand.isTracked else {
             return GestureResult(
@@ -39,7 +40,6 @@ class MLGestureRecognizer {
             )
         }
         
-        // Ensure sufficient tracked joints
         guard hand.joints.count >= 6 else {
             return GestureResult(
                 sign: .none,
@@ -47,12 +47,11 @@ class MLGestureRecognizer {
                 feedback: "Not enough joints tracked"
             )
         }
-        
-        // Extract feature vector (12 = 6 joints × 2 coordinates)
+
         let features = extractFeatures(from: hand)
         
+        // create model input that matches CreateML schema
         do {
-            // Create model input (matches your CreateML schema)
             let input = ASLClassifierReal1Input(
                 feature_0: features[0],
                 feature_1: features[1],
@@ -68,12 +67,11 @@ class MLGestureRecognizer {
                 feature_11: features[11]
             )
             
-            // Get model prediction
             let prediction = try model.prediction(input: input)
             
-            // Map predicted label → ASLSign enum
+            // map predicted label to ASLSign enum
             guard let detectedSign = ASLSign(rawValue: prediction.label) else {
-                print("⚠️ Unknown label from model: \(prediction.label)")
+                print("Unknown label from model: \(prediction.label)")
                 return GestureResult(
                     sign: .none,
                     confidence: 0.0,
@@ -86,11 +84,11 @@ class MLGestureRecognizer {
             if let prob = prediction.labelProbability[prediction.label] {
                 confidence = Float(truncating: prob as NSNumber)
             } else {
-                confidence = 0.85 // fallback
+                confidence = 0.50
             }
             
             let feedback = generateFeedback(for: detectedSign, confidence: confidence)
-            print("🤖 ML Prediction: \(prediction.label) (\(Int(confidence * 100))% confidence)")
+            print("ML prediction: \(prediction.label) (\(Int(confidence * 100))% confidence)")
             
             return GestureResult(
                 sign: detectedSign,
@@ -99,7 +97,7 @@ class MLGestureRecognizer {
             )
             
         } catch {
-            print("❌ ML Prediction error: \(error)")
+            print("ML prediction error: \(error.localizedDescription)")
             return GestureResult(
                 sign: .none,
                 confidence: 0.0,
@@ -108,12 +106,10 @@ class MLGestureRecognizer {
         }
     }
     
-    // MARK: - Feature Extraction
-    
+    // converts a subset of joints into a flat feature vector of length 12 (6 joints × x/y).
     private func extractFeatures(from hand: HandData) -> [Double] {
         var features: [Double] = []
 
-        // Same order as used in DataCollectionView
         let jointsToUse = min(hand.joints.count, 6)
         for i in 0..<jointsToUse {
             let joint = hand.joints[i]
@@ -121,7 +117,6 @@ class MLGestureRecognizer {
             features.append(Double(joint.position.y))
         }
 
-        // Fill up missing values to 12
         while features.count < 12 {
             features.append(0.0)
         }
@@ -129,18 +124,16 @@ class MLGestureRecognizer {
         return features
     }
 
-    // MARK: - Feedback Generator
-    
     private func generateFeedback(for sign: ASLSign, confidence: Float) -> String {
         switch confidence {
         case let c where c > 0.9:
-            return "Perfect! 🎉"
+            return "Perfect"
         case let c where c > 0.75:
-            return "Great! Almost perfect for \(sign.rawValue)"
+            return "Great—almost perfect for \(sign.rawValue)"
         case let c where c > 0.6:
-            return "Good try! Keep practicing \(sign.rawValue)"
+            return "Good try—keep practicing \(sign.rawValue)"
         case let c where c > 0.4:
-            return "Getting closer to \(sign.rawValue)..."
+            return "Getting closer to \(sign.rawValue)"
         default:
             return "Not quite \(sign.rawValue). Review the correct form"
         }

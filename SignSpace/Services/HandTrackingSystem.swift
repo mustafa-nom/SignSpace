@@ -2,11 +2,11 @@ import RealityKit
 import ARKit
 
 struct HandTrackingSystem: System {
-    // CRITICAL: These must be static so they persist across all entities
+    // static so they persist across all entities
     static var arSession = ARKitSession()
     static let handTracking = HandTrackingProvider()
     
-    // Public access to latest hands for other parts of app
+    // public access to latest hands for other parts of app
     @MainActor
     static var latestLeftHand: HandAnchor?
     @MainActor
@@ -15,7 +15,7 @@ struct HandTrackingSystem: System {
     static let query = EntityQuery(where: .has(HandTrackingComponent.self))
     
     init(scene: RealityKit.Scene) {
-        // Start the session once when system initializes
+        // start session once when system initializes
         Task { await Self.runSession() }
     }
     
@@ -24,11 +24,11 @@ struct HandTrackingSystem: System {
         do {
             print("🚀 Starting ARKit hand tracking session...")
             try await arSession.run([handTracking])
-            print("✅ ARKit session running!")
+            print("ARKit session running!")
         } catch let error as ARKitSession.Error {
-            print("❌ ARKit session error: \(error.localizedDescription)")
+            print("ARKit session error: \(error.localizedDescription)")
         } catch {
-            print("❌ Unexpected error: \(error.localizedDescription)")
+            print("Unexpected error: \(error.localizedDescription)")
         }
         
         // Monitor hand updates continuously
@@ -50,19 +50,17 @@ struct HandTrackingSystem: System {
         for entity in handEntities {
             guard var handComponent = entity.components[HandTrackingComponent.self] else { continue }
             
-            // Setup joints if first time
             if handComponent.fingers.isEmpty {
                 addJoints(to: entity, handComponent: &handComponent)
             }
             
-            // Get the correct hand anchor based on chirality
             guard let handAnchor: HandAnchor = switch handComponent.chirality {
                 case .left: Self.latestLeftHand
                 case .right: Self.latestRightHand
                 default: nil
             } else { continue }
             
-            // Update all joint positions
+            // update all joint positions
             if let handSkeleton = handAnchor.handSkeleton {
                 for (jointName, jointEntity) in handComponent.fingers {
                     let anchorFromJointTransform = handSkeleton.joint(jointName).anchorFromJointTransform
@@ -83,14 +81,13 @@ struct HandTrackingSystem: System {
             materials: [material]
         )
         
-        // Add sphere for each joint
+        // spheres for each joint
         for bone in Hand.joints {
             let newJoint = sphereEntity.clone(recursive: false)
             handEntity.addChild(newJoint)
             handComponent.fingers[bone.0] = newJoint
         }
         
-        // Save updated component back to entity
         handEntity.components.set(handComponent)
     }
 }

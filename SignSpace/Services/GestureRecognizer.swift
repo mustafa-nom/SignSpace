@@ -6,6 +6,7 @@
 import Foundation
 import simd
 
+// Rule-based gesture recognizer
 final class GestureRecognizer {
 
     func detectSign(from hand: HandData?) -> GestureResult {

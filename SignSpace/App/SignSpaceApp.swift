@@ -9,7 +9,7 @@ struct SignSpaceApp: App {
         WindowGroup {
             ContentView()
                 .environment(appModel)
-                .environment(\.handTrackingManager, handTracker)  // <-- now ok
+                .environment(\.handTrackingManager, handTracker)
         }
 
         ImmersiveSpace(id: "HandTrackingScene") {

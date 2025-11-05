@@ -14,17 +14,14 @@ class SoundManager {
     private var audioPlayer: AVAudioPlayer?
     
     func playSuccess() {
-        // System sound for success
         AudioServicesPlaySystemSound(1057) // Success tone
     }
     
     func playError() {
-        // System sound for error
         AudioServicesPlaySystemSound(1053) // Light buzz
     }
     
     func playProgress() {
-        // System sound for progress
         AudioServicesPlaySystemSound(1104) // Navigation pop
     }
 }

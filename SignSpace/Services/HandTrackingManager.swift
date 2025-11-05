@@ -1,3 +1,8 @@
+//
+//  HandTrackingManager.swift
+//  SignSpace
+//
+
 import Foundation
 import RealityKit
 import ARKit
@@ -17,15 +22,15 @@ final class HandTrackingManager {
     
     func start() {
         guard handTrackingTask == nil else {
-            print("⚠️ Hand tracking already started")
+            print("Hand tracking already started")
             return
         }
-        print("🚀 Starting hand tracking...")
+        print("Starting hand tracking...")
         handTrackingTask = Task { await startHandTracking() }
     }
     
     func stop() {
-        print("🛑 Stopping hand tracking...")
+        print("Stopping hand tracking...")
         handTrackingTask?.cancel()
         handTrackingTask = nil
         arkitSession = nil
@@ -42,16 +47,16 @@ final class HandTrackingManager {
             self.arkitSession = session
             self.handTrackingProvider = provider
             
-            print("🔐 Requesting hand tracking authorization...")
+            print("Requesting hand tracking authorization...")
             let auth = await session.requestAuthorization(for: [.handTracking])
             guard auth[.handTracking] == .allowed else {
-                print("❌ Hand tracking authorization DENIED")
+                print("Hand tracking authorization denied")
                 return
             }
-            print("✅ Hand tracking authorized!")
+            print("Hand tracking authorized")
             
             try await session.run([provider])
-            print("✅ ARKit session running!")
+            print("ARKit session running")
             
             for await update in provider.anchorUpdates {
                 let anchor = update.anchor
@@ -64,7 +69,7 @@ final class HandTrackingManager {
                 }
             }
         } catch {
-            print("❌ Failed to start hand tracking: \(error.localizedDescription)")
+            print("Failed to start hand tracking: \(error.localizedDescription)")
         }
     }
     
@@ -102,7 +107,7 @@ final class HandTrackingManager {
 // MARK: - Environment key
 
 private struct HandTrackingManagerKey: EnvironmentKey {
-    // make it OPTIONAL so we don't have to create a @MainActor value here
+    // note: an optional default to avoid constructing on a non-main actor
     static let defaultValue: HandTrackingManager? = nil
 }
 

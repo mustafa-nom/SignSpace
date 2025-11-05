@@ -1,6 +1,7 @@
 import RealityKit
 import ARKit
 
+// used for labeling left/right hand
 struct HandTrackingComponent: Component {
     let chirality: AnchoringComponent.Target.Chirality
     var fingers: [HandSkeleton.JointName: Entity] = [:]

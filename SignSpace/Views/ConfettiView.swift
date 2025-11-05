@@ -5,7 +5,6 @@
 //  Created by Mus Nom on 10/16/25.
 //
 
-// ConfettiView.swift
 import SwiftUI
 
 struct ConfettiView: View {
@@ -41,7 +40,6 @@ struct ConfettiView: View {
     }
 }
 
-// If you already defined Color.random elsewhere, remove one of the duplicates.
 extension Color {
     static var random: Color {
         Color(.sRGB,

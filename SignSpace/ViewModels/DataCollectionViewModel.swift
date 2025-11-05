@@ -16,7 +16,6 @@ final class DataCollectionViewModel {
     let targetSamplesPerSign = 100
     let allSigns: [ASLSign] = [.A, .B, .C, .Hello, .ThankYou]
 
-    // comes from the environment (attached later)
     private var handTracker: HandTrackingManager?
     private var recordingTimer: Timer?
 
