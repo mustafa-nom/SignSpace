@@ -78,36 +78,65 @@ Below are screenshots from **SignSpace** running on Apple Vision Pro, showcasing
 - **Mock Data Support** – Simulator testing without physical hardware  
 
 ## 🏗️ Architecture
+
+The codebase follows an **MVVM (Model-View-ViewModel)** architecture for clean separation of concerns:
+
 ```
 SignSpace/
-├── SignSpaceApp.swift # App entry point + immersive space setup
-├── AppModel.swift # App state management
-├── ContentView.swift # Main learning UI + feedback logic
-├── ConfettiView.swift # Confetti animation when sign mastered
-├── DataCollectionView.swift # Data collection & CSV export interface
-├── CSVExporter.swift # Session data tracking & CSV writer
-├── GestureRecognizer.swift # Rule-based ASL gesture recognition
-├── MLGestureRecognizer.swift # CoreML-based gesture prediction
-├── GhostHandData.swift # Ideal hand joint positions per sign 
-├── HandTrackingManager.swift # ARKit session + real-time hand tracking
-├── HandTrackingComponent.swift # RealityKit component for hand entities
-├── HandTrackingSystem.swift # System managing ARKit anchor updates
-├── HandTrackingView.swift # 3D hand entity rendering view
-├── ImmersiveView.swift # RealityView for immersive mode
-├── SoundManager.swift # Audio feedback for success/errors
-├── ToggleImmersiveSpaceButton.swift # Button to toggle immersive view
-└── Assets/ # ASL sign images + app assets
+├── App/                          # Application layer
+│   ├── SignSpaceApp.swift        # App entry point + environment injection
+│   └── AppModel.swift            # Immersive space state management
+│
+├── Views/                        # UI layer (SwiftUI)
+│   ├── ContentView.swift         # Main learning interface
+│   ├── DataCollectionView.swift  # Data collection & CSV export UI
+│   ├── HandTrackingView.swift    # 3D hand entity rendering view
+│   ├── ImmersiveView.swift       # RealityView for immersive mode
+│   ├── ConfettiView.swift        # Confetti celebration animation
+│   └── ToggleImmersiveSpaceButton.swift
+│
+├── ViewModels/                   # Business logic & state
+│   ├── ContentViewModel.swift    # Learning flow logic + feedback state
+│   └── DataCollectionViewModel.swift
+│
+├── Services/                     # Core functionality
+│   ├── HandTrackingManager.swift      # ARKit session + 27-joint tracking
+│   ├── HybridGestureRecognizer.swift  # Combines ML + rule-based recognition
+│   ├── MLGestureRecognizer.swift      # CoreML-based gesture prediction
+│   ├── GestureRecognizer.swift        # Rule-based geometric validation
+│   ├── HandTrackingSystem.swift       # RealityKit ECS system
+│   ├── HandTrackingComponent.swift    # RealityKit component
+│   ├── CSVExporter.swift              # Training data export
+│   └── SoundManager.swift             # Audio feedback
+│
+├── Models/                       # Data structures
+│   ├── ASLSign.swift             # Sign enumeration (A, B, C, Hello, ThankYou)
+│   ├── HandModels.swift          # HandData, HandJoint structs
+│   ├── GestureResult.swift       # Recognition result container
+│   ├── GhostHandData.swift       # Ideal hand positions per sign
+│   ├── TrainingSample.swift      # ML training data structure
+│   └── ASLClassifierReal1.mlmodel # CoreML gesture classifier
+│
+└── Assets/                       # ASL sign images + app assets
 ```
 
 ### Data Flow
 ```
-Vision Pro Hand Tracking
+Vision Pro Hand Tracking (27 joints @ 90Hz)
         ↓
-HandTrackingManager (extracts 27 joints)
+HandTrackingManager (ARKit session → HandData)
         ↓
-MLGestureRecognizer + GestureRecognizer (classifies + validates)
+ContentViewModel (100ms polling timer)
         ↓
-ContentView (shows confidence, feedback, confetti)
+HybridGestureRecognizer
+   ├── MLGestureRecognizer (primary, confidence > 0.88)
+   └── GestureRecognizer (rule-based fallback)
+        ↓
+GestureResult (sign, confidence, feedback)
+        ↓
+ContentViewModel updates state
+        ↓
+ContentView renders UI + triggers audio/confetti
         ↓
 User sees real-time corrections + progress tracking
 ```
@@ -190,7 +219,7 @@ open SignSpace.xcodeproj
 
 The app includes **mock hand tracking** for simulator testing:
 ```swift
-// In HandTrackingManager.swift (line 26)
+// In HandTrackingManager.swift (line 17)
 var useMockData = true  // Simulator mode with animated hands
 ```
 
@@ -214,10 +243,10 @@ var useMockData = false  // Real Vision Pro hand tracking
    - Stores as `SIMD3<Float>` for spatial calculations.
 
 3. **Gesture Recognition**
-   - Two engines work in parallel:
-     - **Rule-based**: Uses distances and angles between joints for precision feedback.
-     - **ML-powered**: CoreML model (`ASLClassifierReal1.mlmodel`) predicts gestures from 12 extracted features (6 joints × 2D coordinates).
-   - Combines both methods for accurate and interpretable recognition.
+   - `HybridGestureRecognizer` intelligently combines two recognition methods:
+     - **ML-powered (primary)**: CoreML model (`ASLClassifierReal1.mlmodel`) predicts gestures from 12 extracted features (6 joints × 2D coordinates). Used when confidence > 0.88.
+     - **Rule-based (fallback)**: Uses distances and angles between joints for precision feedback when ML confidence is low.
+   - This hybrid approach ensures accurate and interpretable recognition.
 
 4. **Generate Feedback**
    - Calculates a confidence score (0–1).
@@ -233,8 +262,8 @@ var useMockData = false  // Real Vision Pro hand tracking
    - Visual and audio cues provide instant correction guidance.
 
 6. **Track Progress**
-   - `ContentView` maintains user progress via `signsLearned` state.
-   - Confetti and success sound trigger on first mastery.
+   - `ContentViewModel` maintains user progress via `signsLearned` state.
+   - Confetti and success sound trigger on first mastery of each sign.
    - Progress indicators fill based on completed signs.
 
 7. **Data Collection Mode**
