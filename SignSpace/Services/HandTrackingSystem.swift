@@ -75,7 +75,8 @@ struct HandTrackingSystem: System {
     
     func addJoints(to handEntity: Entity, handComponent: inout HandTrackingComponent) {
         let radius: Float = 0.01
-        let material = SimpleMaterial(color: .white, isMetallic: false)
+        let materialTone = UIColor(red: 1.0, green: 0.86, blue: 0.75, alpha: 0.75)
+        let material = SimpleMaterial(color: materialTone, isMetallic: false)
         let sphereEntity = ModelEntity(
             mesh: .generateSphere(radius: radius),
             materials: [material]
