@@ -313,14 +313,8 @@ var useMockData = false  // Real Vision Pro hand tracking
 **Abdelaziz Abderhman** – Electrical and Computer Engineering B.S. & Computer Engineering M.S. @ USC  
 *Handled Vision Pro hardware setup and sensor integration for real-time hand tracking.*
 
-**Ahmed Ataelfadeel** – Electrical and Computer Engineering @ USC  
-*Assisted with hardware connectivity under Abdelaziz’s guidance.*
-
 **Hamza Wako** – Computer Science and Business Administration @ USC  
 *Served as project manager, coordinating tasks, deadlines, and testing cycles.*
-
-**Ardysatrio Fakhri Haroen** – Computer Science (M.S.) @ USC  
-*Mentored the team on ML model structure, app architecture, and performance tuning.*
 
 **Built at**: Good Vibes Only Buildathon 2025  
 **Location**: USC Information Sciences Institute, Marina Del Rey 
