@@ -37,15 +37,21 @@ Built at USC's **Good Vibes Only Buildathon 2025** | a16z x Vercel x PayPal x Lo
 Below are screenshots from **SignSpace** running on Apple Vision Pro, showcasing live hand tracking, sign detection, and interactive feedback.
 
 <p align="center">
-  <img src="./images/VisionProA.png" width="75%" alt="SignSpace detecting Sign A"/>
+  <img src="./images/SignSpace_A.png" width="75%" alt="SignSpace detecting Sign A"/>
   <br/>
   <em><strong>Sign A Detection:</strong> The system recognizes the sign “A” and provides a visual feedback bar indicating accuracy.</em>
 </p>
 
 <p align="center">
-  <img src="./images/VisonProB.png" width="75%" alt="SignSpace detecting Sign B"/>
+  <img src="./images/SignSpace_C.png" width="75%" alt="SignSpace detecting Sign C"/>
   <br/>
-  <em><strong>Sign B Detection:</strong> The user performs the sign “B,” with real-time 3D gesture overlay and feedback display.</em>
+  <em><strong>Sign B Detection:</strong> The user performs the sign “C,” with real-time 3D gesture overlay and feedback display.</em>
+</p>
+
+<p align="center">
+  <img src="./images/RecordingDataASL.png" width="75%" alt="SignSpace recording gesture samples"/>
+  <br/>
+  <em><strong>Data Recording Mode:</strong> Used to capture 100 samples per gesture for training the ML model, with clear on-screen instructions for proper hand positioning and motion.</em>
 </p>
 
 <p align="center">
@@ -54,11 +60,6 @@ Below are screenshots from **SignSpace** running on Apple Vision Pro, showcasing
   <em><strong>Sign Detection Mode:</strong> The app detects the sign “Hello” using Apple Vision Pro’s 3D hand tracking and provides real-time, specific feedback (“Extend your index finger straight up”). Currently, this detailed feedback is available only in the mock data view, with live integration in progress.</em>
 </p>
 
-<p align="center">
-  <img src="./images/RecordingDataASL.png" width="75%" alt="SignSpace recording gesture samples"/>
-  <br/>
-  <em><strong>Data Recording Mode:</strong> Used to capture 100 samples per gesture for training the ML model, with clear on-screen instructions for proper hand positioning and motion.</em>
-</p>
 
 ## 🛠️ Technology Stack
 
