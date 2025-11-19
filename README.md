@@ -4,7 +4,7 @@
 
 **Learn American Sign Language with instant, personalized feedback using spatial computing.**
 
-Built at USC's **Good Vibes Only Buildathon 2025** | a16z x PayPal x Lovable x Meta x Apple
+Built at USC's **Good Vibes Only Buildathon 2025** | a16z x Vercel x PayPal x Lovable x Meta x Apple
 
 ## 🎯 The Problem
 
@@ -305,22 +305,6 @@ var useMockData = false  // Real Vision Pro hand tracking
 - [ ] Collaboration with accessibility researchers  
 - [ ] iOS companion app for progress tracking
 
-## 🤝 Contributing
-We welcome contributions! Here's how:
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-### Areas for Contribution
-- Adding more ASL signs
-- Improving gesture recognition accuracy
-- UI/UX enhancements
-- Accessibility features
-- Documentation improvements
-
 ## 👥 Team
 
 **Mustafa Nomair** – Computer Science @ USC  
@@ -329,25 +313,19 @@ We welcome contributions! Here's how:
 **Abdelaziz Abderhman** – Electrical and Computer Engineering B.S. & Computer Engineering M.S. @ USC  
 *Handled Vision Pro hardware setup and sensor integration for real-time hand tracking.*
 
-**Ahmed Ataelfadeel** – Electrical and Computer Engineering @ USC  
-*Assisted with hardware connectivity under Abdelaziz’s guidance.*
-
 **Hamza Wako** – Computer Science and Business Administration @ USC  
 *Served as project manager, coordinating tasks, deadlines, and testing cycles.*
-
-**Ardysatrio Fakhri Haroen** – Computer Science (M.S.) @ USC  
-*Mentored the team on ML model structure, app architecture, and performance tuning.*
 
 **Built at**: Good Vibes Only Buildathon 2025  
 **Location**: USC Information Sciences Institute, Marina Del Rey 
 
 ## 🙏 Acknowledgments
 - **USC Viterbi School of Engineering** - Venue and support
+- **Apple** - Apple Vision Pro access 
 - **PayPal** - Platinum sponsor
 - **Lovable** - Technology partner and credits
 - **Meta** - Judge participation
 - **Microsoft** - Inclusive Tech Lab inspiration
-- **Apple** - Apple Vision Pro access 
 Special thanks to all mentors and organizers who made this possible!
 
 ## 📞 Contact
