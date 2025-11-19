@@ -1,4 +1,5 @@
 import RealityKit
+import UIKit
 import ARKit
 
 struct HandTrackingSystem: System {

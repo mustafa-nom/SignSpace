@@ -1,6 +1,7 @@
 {
   "images" : [
     {
+      "filename" : "SignSpaceIconBack.png",
       "idiom" : "vision",
       "scale" : "2x"
     }
