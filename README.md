@@ -4,7 +4,7 @@
 
 **Learn American Sign Language with instant, personalized feedback using spatial computing.**
 
-Built at USC's **Good Vibes Only Buildathon 2025** | a16z x Vercel x PayPal x Lovable x Meta x Apple
+Built at USC's **Good Vibes Only Buildathon 2025** | a16z x Apple x NVIDIA x Vercel x PayPal x Lovable x Meta
 
 ## 🎯 The Problem
 
