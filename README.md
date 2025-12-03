@@ -26,8 +26,7 @@ Built at USC's **Good Vibes Only Buildathon 2025** | a16z x Apple x NVIDIA x Ver
 
 ## 🎥 Demo
 
-> 🎥 **[Demo Video](https://drive.google.com/file/d/1XPNRzenzS-k5-pO7UJ3PRrQrqJHE6at7/view?usp=sharing)**  
-> 📺 **[Full Version (if Demo doesn’t load)](https://drive.google.com/file/d/1C_VZJxxrgt15Y8MPfRmrAKQ1d2wWfaRr/view?usp=sharing)**  
+> 📺 **[Demo Video](https://drive.google.com/file/d/1q-aBBu7V-8WSWQmzEiUaibJ-9uQLG-UN/view?usp=sharing)**  
 
 **Note:** In the full-length video, you’ll notice that the gesture recognition model was trained on specific hand placements (around 100 samples per sign). Because of that, the system only recognized gestures when they closely matched the positions seen during training. Additionally, the current ML recognizer occasionally references confidence values from other signs when generating feedback -- e.g., it might detect “A” and suggest “Try making C.” Future updates will align the ML feedback system with the same specificity and accuracy as the rule-based mock data version (shown below).
 
