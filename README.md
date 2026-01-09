@@ -22,7 +22,7 @@ Built at USC's **Good Vibes Only Buildathon 2025** | a16z x Apple x NVIDIA x Ver
 - **Specific, actionable feedback** – “Move your thumb closer to your palm” instead of generic errors  
 - **Progress tracking** – Visual indicators showing mastery of each sign  
 - **Spatial visualization** – 3D hand skeleton with joint-level accuracy
-- **Ghost hands overlay (Unused for now)** – Transparent “target” hands show the correct position (will be expanded upon in the next update) 
+- **Ghost hands overlay** – Transparent “target” hands show the correct position (will be expanded upon in the next update) 
 
 ## 🎥 Demo
 
